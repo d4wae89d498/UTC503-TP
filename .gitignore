@@ -1,0 +1,6 @@
+server
+*.js
+*.o
+*.out
+*.a
+*.dSYM
