@@ -5,7 +5,6 @@ body
 }
 .Cases
 {
-    background-color:lightblue;
     width: 33.3%;
     height: 200px;
 }
@@ -74,17 +73,21 @@ header
 #C2L2
 {
     border-style: solid;
-    border-color: black;
     border-width: 2px;
+    outline: none;
+    border-color: white;
+    box-shadow: 0 0 20px #9ecaed;    
 }
 #C1L2,#C3L2
 {
     border-bottom-style: solid;
-    border-bottom-color: black;
+    border-bottom-color: white;
     border-bottom-width: 2px;
     border-top-style: solid;
-    border-top-color: black;
+    border-top-color: white;
     border-top-width: 2px;
+    outline: none;
+    box-shadow: 0 0 20px #9ecaed;
 }
 #C1L1
 {
