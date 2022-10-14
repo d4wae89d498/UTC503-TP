@@ -1,30 +1,31 @@
-CFLAGS		=-Wall -Werror -Wextra -std=c99
-CSRCS		=server.c
-COBJS		=$(CSRCS:.c=.o)
+CFLAGS		=#-Wall -Werror -Wextra
+CSRCS		=server.cpp
+COBJS		=$(CSRCS:.cpp=.o)
 CLIBS		=wsServer/libws.a
 CINCLUDES	=-IwsServer/include
 
-TFLAGS		=
+TFLAGS		=--module es2015
 TSRCS		=client.ts
 TOBJS		=$(TSRCS:.ts=.js)
-
-all: server client
+#export PATH=/usr/local/opt/llvm/bin:$PATH
+#clang --target=wasm32 --no-standard-libraries -Wl,--export-all -Wl,--no-entry -o player.wasm player.cpp
+all: Makefile server client
 submodules:
 	make -C wsServer
 submodules_fclean:
 	make -C wsServer clean
-%.o: %.c submodules server.h
-	cc $(CFLAGS) $(CINCLUDES) -c $< -o $@ -IwsServer
+%.o: %.cpp submodules server.h
+	clang++ $(CFLAGS) $(CINCLUDES) -c $< -o $@ -IwsServer
 %.js: %.ts
-	tsc $< --outFile $@
+	tsc $(TFLAGS) $<
 server: $(COBJS)
-	cc $(CFLAGS) $(COBJS) $(CLIBS) -o $@
+	clang++ $(CFLAGS) $(COBJS) $(CLIBS) -o $@
 client: $(TOBJS)
 clean:
 	rm -rf $(COBJS)
 fclean: clean submodules_fclean
-	rm -rf $(TOBJS)
-	rm -rf server
+#	rm -rf $(TOBJS)
+#	rm -rf server
 re: fclean all
 .PHONY: clean fclean re all submodules submodules_fclean client
 .SUFFIXES:
