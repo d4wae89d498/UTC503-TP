@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le passe temps du CNAM</title>
+    <script type="text/javascript" src="tiktaktoe.js"></script>
+</head>
+<header>
+    <table id="entete">
+        <tr>
+            <td id="btn_page0" class = "pages">Morpion</td>
+            <td id="btn_page1" class = "pages" onclick="showChat()">Room chat</td>
+            <td id="btn_page2" class = "pages">Puissance 4</td>
+        </tr>
+        
+    </table>
+    <div class="pages" style="margin:auto;" onclick="promptOpponent()">
+        <br/>
+        <center>
+            <span class="pseudo0" id="pseudo0"></span> <span id="score0">0</span> - 
+            <span class="pseudo1" id="pseudo1"></span> <span id="score1">0</span>
+        </center>
+        <br/>
+    </div>
+</header>
+<body>
+        <div class="chat hide" >
+            <button onclick="hideChat()">X</button>
+            <div class="messages">
+                
+            </div>
+            <input type="text"/><button style="display:inline-block">ENVOYER</button>
+        </div>
+          <div class="square">
+            <table id="grille">
+                <tr id ="L1">
+                    <td id="C1L1" class ="Cases"></td>
+                    <td id="C2L1" class ="Cases"></td>
+                    <td id="C3L1" class ="Cases"></td>
+                </tr>
+                <tr id ="L2">
+                    <td id="C1L2" class ="Cases"></td>
+                    <td id="C2L2" class ="Cases"></td>
+                    <td id="C3L2" class ="Cases"></td>
+                </tr>
+                <tr id ="L3">
+                    <td id="C1L3" class ="Cases"></td>
+                    <td id="C2L3" class ="Cases"></td>
+                    <td id="C3L3" class ="Cases"></td>
+                </tr>
+            </table>
+          </div>
+       
+    <footer>
+    </footer>
+</body>
+</html>

@@ -6,11 +6,18 @@ using namespace std;
 class Player 
 {
     public:
-    int score;
+    char *name = 0;
+
+    int score = 0;
 
     Player()
     {
         score = 0;
+    }
+
+    ~ Player()
+    {
+        free(name);
     }
 };
 
@@ -44,6 +51,7 @@ class BoardGame : public Board
     public:
     bool    currentPlayer;
     Player  players[2];
+    map<void*, bool> ids;
 
     BoardGame(int boardWidth, int boardHeight) : Board(boardWidth, boardHeight)
     {
