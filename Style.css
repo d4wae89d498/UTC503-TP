@@ -2,20 +2,50 @@ body
 {
     background-image: url('background.jpg');
     background-size: 100%;
+    margin: 0;
 }
+
+.pages
+{
+    background-color: rgba(173, 216, 230, 0.381);
+    width: 10em;
+}
+
 .Cases
 {
     background-color:lightblue;
-    width: 33.3%;
-    height: 200px;
+    width: 33%;
+    height: 33%;
 }
 .Cases:hover
 {
     background-color: lightgrey;
 }
+
+.hide {
+    display: none;
+}
+
+.chat {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+   /* display: none;*/
+    background-color: rgba(255,255,255,0.8);
+    z-index: 99;
+    position: fixed;
+}
+
+.messages {
+    height: 80vh;
+    overflow-y: scroll;
+}
+
 body
 {
     width :100% ;
+    margin: 0px;
     display: inline-block;
 }
 header
@@ -26,35 +56,39 @@ header
 #entete
 {
     width: 100%;
-    height: 100px;
 }
-#btn_page1,#btn_page2
+#btn_page0, #btn_page1,#btn_page2
 {
-    height: 100px;
+    height: 20px;
     border: 1px;
     border-color: lightgrey;
     border-style:solid;
-    width: 50%;
+    width: 33%;
+    text-align: center;
 }
-#btn_page1:hover,#btn_page2:hover
+#btn_page0:hover, #btn_page1:hover,#btn_page1:hover,#btn_page2:hover
 {
     background-color: lightgrey;
 }
-#btn_page1
+#btn_page0
 {
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
-    text-align: center;
+}
+#btn_page1
+{
+
 }
 #btn_page2
 {
     border-top-right-radius: 0.2cm;
     border-bottom-right-radius: 10px;
-    text-align: center;
 }
 #grille
 {
-    width: 50%;
+   width: 100%;
+   height: 100%;
+    
     margin: auto;
     border-collapse: collapse;
     border-color: lightpink;
@@ -106,3 +140,11 @@ header
     border-bottom-right-radius: 10px;
     border-style: none;
 }
+
+.square {
+    margin: auto;
+    max-height: 80vh;
+    max-width: 80vh;
+    aspect-ratio: 1/1;
+    background: #326384;
+  }
