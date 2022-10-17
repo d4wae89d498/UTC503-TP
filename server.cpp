@@ -7,108 +7,64 @@
 
 #include "tiktaktoe.cpp"
 
+#define PORT 8080
+
+#include <map>
 using namespace std;
 
-typedef enum
+map<void*, TikTakToe*> games;
+
+char*   get_packet(const unsigned char *msg, char *type)
 {
-    WAITING_PLAYERS = 0,
-    WAITING_MOVE = 1
-} state;
-
-ws_cli_conn_t *clients[2];
-int target;
-
-state game_state = WAITING_PLAYERS;
-
-TikTakToe game;
-
-int connexions = 0; 
+    if (!strncmp((char*)msg, type, strlen(type)))
+        return (char*)msg + strlen(type);
+    return 0;
+}
 
 void onopen(ws_cli_conn_t *client)
 {
-    char *cli;
-    cli = ws_getaddress(client);
-    printf("Connection opened, addr: %s\n", cli);
-    if (connexions < 2)
-    {
-        clients[connexions] = client;
-        string s = "ID"; s += (connexions + '0');
-        ws_sendframe_txt(client, s.c_str());
-        printf("connexion: %i\tstate: %i\n", connexions, game_state);
-        if (game_state == WAITING_PLAYERS && connexions == 1)
-        {
-            target = rand() % 2;
-            printf("target: %i\n", target);
-            ws_sendframe_txt(clients[target], "FIRST");
-            ws_sendframe_txt(clients[!target], "SECOND"); 
-            game_state = WAITING_MOVE;   
-        }
-    }
-    else 
-    {
-        cout << "Too many clients connected to the server!" << endl;
-    }
-    connexions += 1;
+    char *addr;
+    addr = ws_getaddress(client);
+    printf("Client connected : %s[%p]\n", addr, client);
+    games[client] = new TikTakToe();
 }
 
 void onclose(ws_cli_conn_t *client)
 {
-    char *cli;
-    cli = ws_getaddress(client);
-    printf("Connection closed, addr: %s\n", cli);
-    connexions -= 1;
-    if (client == clients[0])
-    {
-        clients[0] = clients[1];
-        ws_sendframe_txt(clients[0], "DISCON");
-        clients[1] = NULL;
-    }
+    char *addr;
+    addr = ws_getaddress(client);
+    printf("Client disconnected : %s[%p]\n", addr, client);
 }
 
 void onmessage(ws_cli_conn_t *client, const unsigned char *msg, uint64_t size, int type)
 {
     (void) type;
-    char *cli;
-    cli = ws_getaddress(client);
-    
-    
-    //printf("I receive a message: %s (%llu), from: %s\n", msg, size, cli);
-    if (game_state == WAITING_MOVE)
+    char *addr;
+    addr = ws_getaddress(client);
+    printf("Client message : %s[%p] -> %s\n", addr, client, (const char*)msg);
+    char    *packet_data;
+    if ((packet_data = get_packet(msg, "NAME")))
     {
-        if (client == clients[target])
+        games[client]->players[0].name = strdup(packet_data);
+        printf("New name '%s'\n", strdup(games[client]->players[0].name));
+    }
+    if ((packet_data = get_packet(msg, "OPPONENT")))
+    {
+        for (auto it = games.begin(); it != games.end(); ++it)
         {
-            printf ("MOVE : %s\n", msg);
-            if (!game.move((const char*)msg))
+            if (it->second->players[0].name && !strcmp(it->second->players[0].name, packet_data))
             {
-                ws_sendframe_txt(clients[target], "ILLEGAL");
+                it->second->players[1].name = games[client]->players[0].name;
+                delete games[client];
+                games[client] = it->second;
+                printf("NEW MATCH: %s vs %s\n", it->second->players[0].name, it->second->players[1].name);
                 return ;
             }
-            ws_sendframe_txt(clients[target], "OK");
-            if (game.win())
-            {
-                ws_sendframe_txt(clients[target], "WINNER");
-                ws_sendframe_txt(clients[!target], "LOOSER");
-                game.getCurrentPlayer()->score += 1;
-                string s = "SCORE"; 
-                s += to_string(game.players[game.currentPlayer].score);
-                s += "-";
-                s += to_string(game.players[game.currentPlayer].score);
+        }
 
-                ws_sendframe_txt(clients[target], s.c_str());
-                ws_sendframe_txt(clients[!target], s.c_str());
-            }
-            else 
-            {
-                ws_sendframe_txt(clients[!target], (const char*)msg);
-                target = !target;
-                game.currentPlayer = !game.currentPlayer;
-            }
-        }
-        else
-        {
-            cout << "Protocol watning, wrong client reply." << endl;
-        }
+        printf("OPPONENT NOT FOUND!! %s", packet_data);
     }
+    printf("[%s]\n", packet_data);
 }
 
 int main(void)
@@ -119,6 +75,7 @@ int main(void)
     evs.onopen    = &onopen;
     evs.onclose   = &onclose;
     evs.onmessage = &onmessage;
-    ws_socket(&evs, 8080, 0, 1000);
+    printf("Starting server on port %i\n", PORT);
+    ws_socket(&evs, PORT, 0, 1000);
     return (0);
 }

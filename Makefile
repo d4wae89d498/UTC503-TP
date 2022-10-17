@@ -5,7 +5,7 @@ CLIBS		=wsServer/libws.a
 CINCLUDES	=-IwsServer/include
 
 TFLAGS		=--module es2015
-TSRCS		=client.ts
+TSRCS		=tiktaktoe.ts
 TOBJS		=$(TSRCS:.ts=.js)
 #export PATH=/usr/local/opt/llvm/bin:$PATH
 #clang --target=wasm32 --no-standard-libraries -Wl,--export-all -Wl,--no-entry -o player.wasm player.cpp
