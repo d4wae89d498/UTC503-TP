@@ -11,9 +11,10 @@
 <header>
     <table id="entete">
         <tr>
-            <td id="btn_page0" class = "pages">Morpion</td>
-            <td id="btn_page1" class = "pages" onclick="showChat()">Room chat</td>
-            <td id="btn_page2" class = "pages">Puissance 4</td>
+            <td id="btn_page0" class = "pages" onclick="showMenu()">Jeux</td>
+            <td id="btn_page1" class = "pages" onclick="showChat()">Pseudo</td>
+            <td id="btn_page1" class = "pages" onclick="showChat()">Chat</td>
+            <td id="btn_page2" class = "pages" onclick="showChat()">Nouvelle partie</td>
         </tr>
         
     </table>
@@ -27,8 +28,27 @@
     </div>
 </header>
 <body>
+    <div class="menu hide" >
+        <button onclick="hideMenu()">X</button>
+        <div class="menuitems">
+            <br/>
+            <center>
+                <h1>Menu</h1>
+                <br/>
+                <br/>
+                <ul>
+                    <li><a href="#"><strong>Morpion</strong></a></li>
+                    <li><a href="#">Puissance 4</a></li>
+                </ul>
+            </center> 
+        </div>
+    </div>
         <div class="chat hide" >
             <button onclick="hideChat()">X</button>
+            <br/>
+            <center>
+                <h1>Messages</h1>
+            </center>
             <div class="messages">
                 
             </div>
