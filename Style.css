@@ -33,15 +33,20 @@ body
     box-shadow: 0 0 20px #9ecaed;
 }
 .Cases:hover
-{
+{/*
     background-color: rgba(255, 255, 255, 0.651);
-   /* border-color: white;
+    border-color: white;
     border-style: solid;
-    outline: none;*/
+    outline: none;
 
     border-width: 2px;
 
-    box-shadow: 0 0 50px 10px #9ecaed;
+    box-shadow: 0 0 50px 10px #9ecaed;*/
+    background-color: rgba(255, 255, 255, 0.651);
+    border-color: white;
+    border-style: solid;
+    outline: none;
+    border-width: 2px;
 }
 .hide {
     display: none;
@@ -94,8 +99,10 @@ header
 {
     height: 20px;
     border: 1px;
+    
     border-color: lightgrey;
     border-style:solid;
+   
   /*  width: 33%;*/
     background-color: rgba(173, 216, 230, 0.381);
     text-align: center;
