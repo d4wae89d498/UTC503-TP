@@ -184,7 +184,7 @@ class TikTakToe : public BoardGame
         int total = 0;
         while (i < this->boardHeight)
         {
-            if (this->grid[this->boardHeight - i][i] == playerSymbol)
+            if (this->grid[this->boardHeight - 1 - i][i] == playerSymbol)
                 total += 1;
             i += 1;
         }

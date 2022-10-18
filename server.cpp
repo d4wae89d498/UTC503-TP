@@ -49,10 +49,6 @@ void onmessage(ws_cli_conn_t *client, const unsigned char *msg, uint64_t size, i
         games[client]->players[0].addr = client;
         printf("New name '%s'\n", strdup(games[client]->players[0].name));
     }
-    else if ((packet_data = get_packet(msg, "SHUTDOWN")))
-    {
-        exit(0);
-    }
     else if ((packet_data = get_packet(msg, "OPPONENT")))
     {
         // dont allow same player twice
@@ -88,7 +84,7 @@ void onmessage(ws_cli_conn_t *client, const unsigned char *msg, uint64_t size, i
                     while (y < 2)
                     {
                         char *msg3;
-                        asprintf(&msg3, "PSEUDO%i-%s (%c)", y, games[client]->players[y].name, y == start ? 'x' : 'o');
+                        asprintf(&msg3, "PSEUDO%i-%s (%c)", y, games[client]->players[y].name, y ? 'x' : 'o');
                         ws_sendframe_txt((ws_cli_conn_t*)games[client]->players[i].addr, msg3);
                         free(msg3);
 
