@@ -21,14 +21,27 @@ body
     width: 33.3%;
     height: 33.3%;
     background-color: rgba(255, 255, 255, 0.253);
+
+   
+    border-style: none;
+    border-bottom-style: solid;
+    border-bottom-color: white;
+    border-bottom-width: 2px;
+    border-right-style: solid;
+    border-right-color: white;
+    border-right-width: 2px;
+    box-shadow: 0 0 20px #9ecaed;
 }
 .Cases:hover
 {
-    background-color: rgba(255, 255, 255, 0.151);
-    border-color: white;
+    background-color: rgba(255, 255, 255, 0.651);
+   /* border-color: white;
     border-style: solid;
-    outline: none;
+    outline: none;*/
+
     border-width: 2px;
+
+    box-shadow: 0 0 50px 10px #9ecaed;
 }
 .hide {
     display: none;
@@ -81,14 +94,10 @@ header
 {
     height: 20px;
     border: 1px;
-<<<<<<< HEAD
     border-color: lightgrey;
     border-style:solid;
   /*  width: 33%;*/
-=======
     background-color: rgba(173, 216, 230, 0.381);
-    width: 33%;
->>>>>>> 0bad41396461a137544e9a221a2eedd473afed66
     text-align: center;
     color: #fff;
 }
@@ -126,10 +135,7 @@ header
     border-color: white;
     box-shadow: 10 0 100px #9ecaed;
 }
-<<<<<<< HEAD
 
-
-=======
 #C2L1,#C2L3
 {
     border-left-style: solid;
@@ -207,7 +213,6 @@ header
     border-left-width: 2px;
     box-shadow: 0 0 20px #9ecaed;
 }
->>>>>>> 0bad41396461a137544e9a221a2eedd473afed66
 .square {
     margin: auto;
     max-height: 80vh;
