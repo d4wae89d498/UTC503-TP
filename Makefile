@@ -1,4 +1,4 @@
-CFLAGS		=#-Wall -Werror -Wextra
+CFLAGS		=-g -fsanitize=address#-Wall -Werror -Wextra
 CSRCS		=server.cpp
 COBJS		=$(CSRCS:.cpp=.o)
 CLIBS		=wsServer/libws.a

@@ -5,6 +5,11 @@ body
     margin: 0;
 }
 
+.current {
+    font-size: 1.5em;
+    color: antiquewhite;
+}
+
 .pages
 {
     background-color: rgba(173, 216, 230, 0.381);
@@ -96,50 +101,7 @@ header
     border-width: 5px;
     border-radius: 10px;
 }
-#C2L1,#C2L3
-{
-    border-left-style: solid;
-    border-left-color: black;
-    border-left-width: 2px;
-    border-right-style: solid;
-    border-right-color: black;
-    border-right-width: 2px;
-}
-#C2L2
-{
-    border-style: solid;
-    border-color: black;
-    border-width: 2px;
-}
-#C1L2,#C3L2
-{
-    border-bottom-style: solid;
-    border-bottom-color: black;
-    border-bottom-width: 2px;
-    border-top-style: solid;
-    border-top-color: black;
-    border-top-width: 2px;
-}
-#C1L1
-{
-    border-top-left-radius: 10px;
-    border-style: none;
-}
-#C3L1
-{
-    border-top-right-radius: 10px;
-    border-style: none;
-}
-#C1L3
-{
-    border-bottom-left-radius: 10px;
-    border-style: none;
-}
-#C3L3
-{
-    border-bottom-right-radius: 10px;
-    border-style: none;
-}
+
 
 .square {
     margin: auto;

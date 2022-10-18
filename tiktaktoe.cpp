@@ -1,13 +1,15 @@
 #define MAX_Board_SIZE 128
 #include <iostream>
+#include <map>
 
 using namespace std;
 
 class Player 
 {
     public:
-    char *name = 0;
 
+    void *addr;
+    char *name = 0;
     int score = 0;
 
     Player()
@@ -51,11 +53,12 @@ class BoardGame : public Board
     public:
     bool    currentPlayer;
     Player  players[2];
-    map<void*, bool> ids;
+    int     moves;
 
     BoardGame(int boardWidth, int boardHeight) : Board(boardWidth, boardHeight)
     {
         currentPlayer = 0;
+        moves = 0;
     }
 
     Player *getCurrentPlayer()
@@ -94,10 +97,28 @@ class TikTakToe : public BoardGame
     public:
     const char c[2] = {'o', 'x'};
 
-    TikTakToe() : BoardGame(3, 3)
+    void clear()
     {
+        int i = 0;
+        while (i < boardHeight)
+        {
+            int y = 0;
+            while (y < boardWidth)
+            {
+                grid[i][y] = ' ';
+                y += 1;
+            }
+            i += 1;
+        }
+        moves = 0;
     }
 
+    TikTakToe() : BoardGame(3, 3)
+    {
+        clear();
+    }
+
+   
     bool checkLines()
     {
         char playerSymbol = c[currentPlayer];
@@ -163,7 +184,7 @@ class TikTakToe : public BoardGame
         int total = 0;
         while (i < this->boardHeight)
         {
-            if (this->grid[this->boardHeight - i][this->boardHeight - i] == playerSymbol)
+            if (this->grid[this->boardHeight - i][i] == playerSymbol)
                 total += 1;
             i += 1;
         }
@@ -179,10 +200,14 @@ class TikTakToe : public BoardGame
         int i, y;
         if (sscanf(str, "%i-%i", &i, &y) != 2)
             return false;
+        printf("i=%i y=%i\n", i, y);
+        i -= 1;
+        y -= 1;
         if (i < 0 || i > 2 || y < 0 || y > 2)
             return false;
         if (this->grid[i][y] != ' ')
             return false;
+        moves += 1;
         this->grid[i][y] = c[currentPlayer];
         this->draw();
         return true;
@@ -196,6 +221,11 @@ class TikTakToe : public BoardGame
             return true;
         }
         return false;
+    }
+
+    bool equal()
+    {
+        return moves == boardWidth * boardHeight;
     }
 };
 
