@@ -3,8 +3,6 @@
 Par Jérémy, Alexis, Marc
 
 Client: javascript
-Server: C 
+Server: C++ 
 Protocol: websocket
-Graphisme: html/CSS
-Réparer la diagonal
-destroy du socket
+Graphisme: HTML/CSS
