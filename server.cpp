@@ -12,12 +12,12 @@
 #include <map>
 using namespace std;
 
-map<void*, shared_ptr<TikTakToe> > games;
+map<void *, shared_ptr<TikTakToe> > games;
 
-char*   get_packet(const unsigned char *msg, char *type)
+char *get_packet(const unsigned char *msg, char *type)
 {
-    if (!strncmp((char*)msg, type, strlen(type)))
-        return (char*)msg + strlen(type);
+    if (!strncmp((char *)msg, type, strlen(type)))
+        return (char *)msg + strlen(type);
     return 0;
 }
 
@@ -29,6 +29,25 @@ void onopen(ws_cli_conn_t *client)
     games[client] = shared_ptr<TikTakToe>(new TikTakToe());
 }
 
+void send_score(void *client)
+{
+    int i = 0;
+    while (i < 2)
+    {
+
+        int y = 0;
+        while (y < 2)
+        {
+            char *msg3 = 0;
+            asprintf(&msg3, "SCORE%i-%i", y, games[client]->players[y].score);
+            ws_sendframe_txt((ws_cli_conn_t *)games[client]->players[i].addr, msg3);
+            y += 1;
+            free(msg3);
+        }
+        i += 1;
+    }
+}
+
 void onclose(ws_cli_conn_t *client)
 {
     char *addr;
@@ -38,11 +57,11 @@ void onclose(ws_cli_conn_t *client)
 
 void onmessage(ws_cli_conn_t *client, const unsigned char *msg, uint64_t size, int type)
 {
-    (void) type;
+    (void)type;
     char *addr;
     addr = ws_getaddress(client);
-    printf("Client message : %s[%p] -> %s\n", addr, client, (const char*)msg);
-    char    *packet_data;
+    printf("Client message : %s[%p] -> %s\n", addr, client, (const char *)msg);
+    char *packet_data;
     if ((packet_data = get_packet(msg, "NAME")))
     {
         games[client]->players[0].name = strdup(packet_data);
@@ -55,7 +74,7 @@ void onmessage(ws_cli_conn_t *client, const unsigned char *msg, uint64_t size, i
         if (!strcmp(packet_data, games[client]->players[0].name))
         {
             ws_sendframe_txt(client, "OPPONENT_NOT_FOUND");
-            return ;
+            return;
         }
         for (auto it = games.begin(); it != games.end(); ++it)
         {
@@ -65,46 +84,42 @@ void onmessage(ws_cli_conn_t *client, const unsigned char *msg, uint64_t size, i
 
                 it->second->players[1].name = strdup(games[client]->players[0].name);
                 games[client] = it->second;
-                it->second->players[1].addr = client;                
-
+                it->second->players[1].addr = client;
 
                 printf("NEW MATCH: %s vs %s\n", it->second->players[0].name, it->second->players[1].name);
 
-               
                 // TODO :: initalize a new player ::
 
                 int start = rand() % 2;
                 games[client]->currentPlayer = start;
-                games[client]->clear(); 
+                games[client]->clear();
                 int i = 0;
                 while (i < 2)
                 {
-                    ws_sendframe_txt((ws_cli_conn_t*)games[client]->players[i].addr, "CLEAR");
+                    ws_sendframe_txt((ws_cli_conn_t *)games[client]->players[i].addr, "CLEAR");
                     int y = 0;
                     while (y < 2)
                     {
                         char *msg3;
                         asprintf(&msg3, "PSEUDO%i-%s (%c)", y, games[client]->players[y].name, y ? 'x' : 'o');
-                        ws_sendframe_txt((ws_cli_conn_t*)games[client]->players[i].addr, msg3);
+                        ws_sendframe_txt((ws_cli_conn_t *)games[client]->players[i].addr, msg3);
                         free(msg3);
 
                         asprintf(&msg3, "SCORE%i-%i", y, games[client]->players[y].score);
-                        ws_sendframe_txt((ws_cli_conn_t*)games[client]->players[i].addr, msg3);
+                        ws_sendframe_txt((ws_cli_conn_t *)games[client]->players[i].addr, msg3);
                         y += 1;
                         free(msg3);
                     }
 
-                  
                     char *msg2;
                     asprintf(&msg2, "CURRENT%i", start);
-                    
 
-                    ws_sendframe_txt((ws_cli_conn_t*)games[client]->players[i].addr, msg2);
+                    ws_sendframe_txt((ws_cli_conn_t *)games[client]->players[i].addr, msg2);
                     free(msg2);
 
                     i += 1;
                 }
-                return ;
+                return;
             }
         }
         ws_sendframe_txt(client, "OPPONENT_NOT_FOUND");
@@ -116,44 +131,42 @@ void onmessage(ws_cli_conn_t *client, const unsigned char *msg, uint64_t size, i
             if (!games[client]->move(packet_data))
             {
                 ws_sendframe_txt(client, "ILLEGAL");
-                return ;
-            }  
+                return;
+            }
             char *s;
             asprintf(&s, "MOVE%i-%s", games[client]->currentPlayer, packet_data);
-            ws_sendframe_txt((ws_cli_conn_t*)games[client]->players[0].addr, s);
-            ws_sendframe_txt((ws_cli_conn_t*)games[client]->players[1].addr,s);
+            ws_sendframe_txt((ws_cli_conn_t *)games[client]->players[0].addr, s);
+            ws_sendframe_txt((ws_cli_conn_t *)games[client]->players[1].addr, s);
             free(s);
 
             if (games[client]->win())
             {
-                ws_sendframe_txt((ws_cli_conn_t*)games[client]->players[games[client]->currentPlayer].addr, "WINNER");
-                ws_sendframe_txt((ws_cli_conn_t*)games[client]->players[!games[client]->currentPlayer].addr, "LOOSER");
-                return ;
-            } else if (games[client]->equal())
+                ws_sendframe_txt((ws_cli_conn_t *)games[client]->players[games[client]->currentPlayer].addr, "WINNER");
+                ws_sendframe_txt((ws_cli_conn_t *)games[client]->players[!games[client]->currentPlayer].addr, "LOOSER");
+                send_score(client);
+                return;
+            }
+            else if (games[client]->equal())
             {
-                ws_sendframe_txt((ws_cli_conn_t*)games[client]->players[games[client]->currentPlayer].addr, "EQUAL");
-                ws_sendframe_txt((ws_cli_conn_t*)games[client]->players[!games[client]->currentPlayer].addr, "EQUAL");
-                return ; 
+                ws_sendframe_txt((ws_cli_conn_t *)games[client]->players[games[client]->currentPlayer].addr, "EQUAL");
+                ws_sendframe_txt((ws_cli_conn_t *)games[client]->players[!games[client]->currentPlayer].addr, "EQUAL");
+                send_score(client);
+                return;
             }
 
             games[client]->currentPlayer ^= 1;
 
-           
-                      
-
             asprintf(&s, "CURRENT%i", games[client]->currentPlayer);
 
+            ws_sendframe_txt((ws_cli_conn_t *)games[client]->players[0].addr, s);
+            ws_sendframe_txt((ws_cli_conn_t *)games[client]->players[1].addr, s);
 
-            ws_sendframe_txt((ws_cli_conn_t*)games[client]->players[0].addr, s);
-            ws_sendframe_txt((ws_cli_conn_t*)games[client]->players[1].addr,s);
-
-            free(s);            
+            free(s);
         }
         else
         {
             ws_sendframe_txt(client, "NOT_YOU");
         }
-        
     }
 }
 
@@ -162,8 +175,8 @@ int main(void)
     srand(time(0));
 
     struct ws_events evs;
-    evs.onopen    = &onopen;
-    evs.onclose   = &onclose;
+    evs.onopen = &onopen;
+    evs.onclose = &onclose;
     evs.onmessage = &onmessage;
     printf("Starting server on port %i\n", PORT);
     ws_socket(&evs, PORT, 0, 1000);

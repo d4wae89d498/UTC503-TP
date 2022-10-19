@@ -225,7 +225,13 @@ class TikTakToe : public BoardGame
 
     bool equal()
     {
-        return moves == boardWidth * boardHeight;
+        if(moves == boardWidth * boardHeight)
+        {
+            this->players[0].score += 1;
+            this->players[1].score += 1;
+            return true;
+        }
+        return false;
     }
 };
 
