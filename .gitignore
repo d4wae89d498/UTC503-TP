@@ -1,5 +1,4 @@
 server
-*.js
 *.o
 *.out
 *.a
