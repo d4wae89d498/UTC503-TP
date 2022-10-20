@@ -11,17 +11,16 @@
 <header>
     <table id="entete">
         <tr>
-            <td id="btn_page0" class = "pages" onclick="showMenu()">Jeux</td>
+            <td id="btn_page0" class = "pages" ><a class="btn_page" href="menujeux.html">Jeux</a></td>
             <td id="btn_page1" class = "pages" onclick="showChat()">Pseudo</td>
             <td id="btn_page1" class = "pages" onclick="showChat()">Chat</td>
             <td id="btn_page2" class = "pages" onclick="showChat()">Nouvelle partie</td>
         </tr>
-        
     </table>
     <div class="pages" style="margin:auto;" onclick="promptOpponent()">
         <br/>
         <center style="color: white;">
-            <span class="pseudo0" id="pseudo0"></span> <span id="score0">0</span> - 
+            <span class="pseudo0" id="pseudo0"></span> <span id="score0">0</span>
             <span class="pseudo1" id="pseudo1"></span> <span id="score1">0</span>
         </center>
         <br/>
@@ -68,8 +67,8 @@
                 </tr>
                 <tr id ="L3">
                     <td id="1-3" class ="Cases"></td>
-                    <td id="2-3" class ="Cases"></td>
-                    <td id="3-3" class ="Cases"></td>
+                    <td id="2-3" class ="Cases">O</td>
+                    <td id="3-3" class ="Cases">X</td>
                 </tr>
             </table>
           </div>

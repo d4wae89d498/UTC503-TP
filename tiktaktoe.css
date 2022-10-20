@@ -9,7 +9,6 @@ body
     font-size: 1.5em;
     color: antiquewhite;
 }
-
 .pages
 {
     background-color: rgba(173, 216, 230, 0.381);
@@ -31,6 +30,22 @@ body
     border-right-color: white;
     border-right-width: 2px;
     box-shadow: 0 0 20px #9ecaed;
+    text-align: center;
+    color: #fff;
+    font-size: 150px;
+    font-family: monospace;
+    text-shadow:
+    0 0 7px #fff, 
+    0 0 10px #fff, 
+    0 0 42px rgb(230, 18, 124),
+    0 0 77px rgb(230, 18, 124),
+    0 0 100px rgb(230, 18, 124);
+ /*  text-shadow:
+    0 0 7px #fff, 
+    0 0 10px #fff, 
+    0 0 42px rgb(18, 205, 230),
+    0 0 77px rgb(18, 205, 230),
+    0 0 100px rgb(18, 205, 230);*/
 }
 .Cases:hover
 {/*

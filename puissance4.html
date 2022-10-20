@@ -5,9 +5,28 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Puissance 4</title>
 </head>
-<body>
+    <header>
+        <table id="entete">
+            <tr>
+                <td id="btn_page0" class = "pages" ><a class="btn_page" href="menujeux.html">Jeux</a></td>
+                <td id="btn_page1" class = "pages" onclick="showChat()">Pseudo</td>
+                <td id="btn_page1" class = "pages" onclick="showChat()">Chat</td>
+                <td id="btn_page2" class = "pages" onclick="showChat()">Nouvelle partie</td>
+            </tr>
+        
+        </table>
+        <div class="pages" style="margin:auto;" onclick="promptOpponent()">
+        <br/>
+        <center style="color: white;">
+            <span class="pseudo0" id="pseudo0"></span> <span id="score0">0</span>
+            <span class="pseudo1" id="pseudo1"></span> <span id="score1">0</span>
+        </center>
+        <br/>
+        </div>
+    </header>
+    <body>
     
-</body>
+    </body>
 </html>
