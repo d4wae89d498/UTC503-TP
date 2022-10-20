@@ -35,7 +35,7 @@ socket.onmessage = function (event) {
     // HANDLE THE UUID BASED AUTH - TOKEN0123456789
     if (packet_data = get_packet(event, "TOKEN") !== 0)
         localStorage.setItem("token", packet_data);
-    // SET PLAYER POSITIONS (first or second) - CURRENT0 or ID1
+    // SET PLAYER POSITIONS (first or second) - CURRENT0 or CURRENT1
     else if (packet_data = get_packet(event, "CURRENT"))
     {
         id = packet_data;
@@ -46,8 +46,22 @@ socket.onmessage = function (event) {
     // HANDLE A MOVE : MOVE0-1-2 for moving plyer 0 in 1-2
     else if (packet_data = get_packet(event, "MOVE"))
     {
-        let s = packet_data.split("-");
-        document.getElementById(s[1] + "-" + s[2]).innerText = (s[0] == "0" ? "o" : "x");
+     //   let s = packet_data.split("C");
+     //   s[0].replace('L', ""); 
+        // collonnes lignes
+      let s = packet_data.split("-");
+
+
+        document.getElementById("L" + s[1] + "C" + s[2]).innerText = (s[0] == "0" ? "o" : "x");
+        if (s[0] == "0")
+        {
+            document.getElementById("L" + s[1] + "C" + s[2]).classList.add("croix");
+        }
+        else
+        {
+            document.getElementById("L" + s[1] + "C" + s[2]).classList.add("rond");
+        }
+        // add class croix et class rond
     }
     // HANDLE A SCORE : SCORE1-2 for setting score of 1 to 2
     else if (packet_data = get_packet(event, "SCORE"))
@@ -77,6 +91,8 @@ socket.onmessage = function (event) {
         while (i < items.length)
         {
             items[i].innerText = "";
+             items[i].classList.remove("croix");
+             items[i].classList.remove("croix");
             i += 1;
         }
     } 
@@ -150,7 +166,9 @@ while (i < document.getElementsByClassName("Cases").length)
 {
     document.getElementsByClassName("Cases")[i].onclick = function()
     {
-        socket.send("MOVE"+this.id)
+        let s = this.id.split("C");
+        s[0] = s[0].replace('L', ""); 
+        socket.send("MOVE"+ s[0] + "-" + s[1]);
     }
     i += 1;
 }

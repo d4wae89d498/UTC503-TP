@@ -130,6 +130,7 @@ void onmessage(ws_cli_conn_t *client, const unsigned char *msg, uint64_t size, i
         {
             if (!games[client]->move(packet_data))
             {
+                printf("%s\n", packet_data);
                 ws_sendframe_txt(client, "ILLEGAL");
                 return;
             }

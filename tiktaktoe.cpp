@@ -54,6 +54,11 @@ class BoardGame : public Board
     bool    currentPlayer;
     Player  players[2];
     int     moves;
+    const char c[2] = {'o', 'x'};
+
+    //virtual bool move(const char *str);
+    //virtual bool win();
+    //virtual bool equal();
 
     BoardGame(int boardWidth, int boardHeight) : Board(boardWidth, boardHeight)
     {
@@ -90,12 +95,6 @@ class BoardGame : public Board
             i += 1;
         }
     }
-};
-
-class TikTakToe : public BoardGame 
-{
-    public:
-    const char c[2] = {'o', 'x'};
 
     void clear()
     {
@@ -113,6 +112,78 @@ class TikTakToe : public BoardGame
         moves = 0;
     }
 
+};
+
+class Puissance4 : public BoardGame
+{
+    public:
+
+    Puissance4() : BoardGame(7, 6)
+    {
+        clear();
+    }
+
+    public:
+
+    bool move(const char *str)
+    {
+        int i, y;
+        if (sscanf(str, "%i-%i", &i, &y) != 2)
+            return false;
+        printf("i=%i y=%i\n", i, y);
+        i -= 1;
+        y -= 1;
+        if (i < 0 || i > 2 || y < 0 || y > 2)
+            return false;
+        if (this->grid[i][y] != ' ')
+            return false;
+        moves += 1;
+       /* while (i > 0)
+        {
+            if (this->grid[i][y] == ' ')
+            {
+                i -= 1;
+            }
+            else
+            {
+                i += 1;
+                break ;
+            }
+
+        }*/
+        this->grid[i][y] = c[currentPlayer];
+        this->draw();
+        return true;
+    }
+
+    bool win()
+    {
+        if (false)//checkLines() || checkColumns() || checkDiagonalA() || checkDiagonalB())
+        {
+            this->getCurrentPlayer()->score += 1;
+            return true;
+        }
+        return false;
+    }
+
+    bool equal()
+    {
+        if(moves == boardWidth * boardHeight)
+        {
+            this->players[0].score += 1;
+            this->players[1].score += 1;
+            return true;
+        }
+        return false;
+    }
+
+};
+
+class TikTakToe : public BoardGame 
+{
+    public:
+
+   
     TikTakToe() : BoardGame(3, 3)
     {
         clear();
@@ -207,6 +278,21 @@ class TikTakToe : public BoardGame
             return false;
         if (this->grid[i][y] != ' ')
             return false;
+
+      //        moves += 1;
+      /*  while (i > 0)
+        {
+            if (this->grid[i][y] == ' ')
+            {
+                i -= 1;
+            }
+            else
+            {
+                i += 1;
+                break ;
+            }
+
+        }*/
         moves += 1;
         this->grid[i][y] = c[currentPlayer];
         this->draw();
