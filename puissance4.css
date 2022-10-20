@@ -34,12 +34,19 @@ body
 }
 #btn_page0:hover, #btn_page1:hover,#btn_page1:hover,#btn_page2:hover
 {
+    background-color: rgb(230, 18, 124, 0.381);
+    box-shadow:
+    0 0 7px #fff,
+    0 0 10px #fff,
+    0 0 42px rgb(230, 18, 124),
+    0 0 77px rgb(230, 18, 124),
+    0 0 100px rgb(230, 18, 124);
     text-shadow:
     0 0 7px #fff, 
     0 0 10px #fff, 
-    0 0 42px rgb(230, 18, 124),   
-    0 0 77px rgb(230, 18, 124), 
-    0 0 100px rgb(230, 18, 124)
+    0 0 42px rgb(230, 18, 124),
+    0 0 77px rgb(230, 18, 124),
+    0 0 100px rgb(230, 18, 124);
 }
 #btn_page0
 {
@@ -54,4 +61,10 @@ body
 #entete
 {
     width: 100%;
+}
+td a
+{
+    
+    display: block;
+    height: 100%;
 }
