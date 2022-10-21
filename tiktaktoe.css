@@ -37,15 +37,7 @@ body
   
 }
 .Cases:hover
-{/*
-    background-color: rgba(255, 255, 255, 0.651);
-    border-color: white;
-    border-style: solid;
-    outline: none;
-
-    border-width: 2px;
-
-    box-shadow: 0 0 50px 10px #9ecaed;*/
+{
     background-color: rgba(255, 255, 255, 0.651);
     border-color: white;
     border-style: solid;

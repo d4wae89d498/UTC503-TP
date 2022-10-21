@@ -68,3 +68,38 @@ td a
     display: block;
     height: 100%;
 }
+.Cases
+{
+
+    background-color: rgba(255, 255, 255, 0.253);
+
+   
+    border-style: none;
+    border-bottom-style: solid;
+    border-bottom-color: white;
+    border-bottom-width: 2px;
+    border-right-style: solid;
+    border-right-color: white;
+    border-right-width: 2px;
+    box-shadow: 0 0 20px #9ecaed;
+    text-align: center;
+    color: #fff;
+    font-size: 150px;
+    font-family: monospace;
+  
+}
+.Cases:hover
+{
+    background-color: rgba(255, 255, 255, 0.651);
+    border-color: white;
+    border-style: solid;
+    outline: none;
+    border-width: 2px;
+}
+.square {
+    margin: auto;
+    max-height: 80vh;
+    max-width: 80vh;
+    aspect-ratio: 1/1;
+    /*background: #326384;*/
+  }
