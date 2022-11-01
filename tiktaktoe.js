@@ -29,12 +29,38 @@ socket.onopen = function (e) {
         document.getElementsByClassName("pseudo0")[0].innerText = name;
     }
 };
+
+function chooseOp(str)
+{
+  //  alert('op');
+
+    socket.send("OPPONENT"+str);
+    hideRooms();
+}
+
 socket.onmessage = function (event) {
     let packet_data; 
     console.log(`[message] Data received from server: ${event.data}`);
     // HANDLE THE UUID BASED AUTH - TOKEN0123456789
     if (packet_data = get_packet(event, "TOKEN") !== 0)
         localStorage.setItem("token", packet_data);
+    else if (packet_data = get_packet(event, "ROOM"))
+    {
+        let html = "";
+        let rooms = packet_data.split("ROOM-").splice(1);
+        for (const i in rooms)
+        {
+            let names = rooms[i].split("-");
+            if (names.length == 1)
+                html +=  `<li><a href="#" onclick="chooseOp(this.innerText)">${names[0]}</a></li>`;   
+            else 
+            {
+                console.log(names);
+                html +=  `<li>${names[0]} - ${names[1]}</li>`;   
+            }
+        }
+        document.getElementById("rooms_list").innerHTML = html;
+    }
     // SET PLAYER POSITIONS (first or second) - CURRENT0 or CURRENT1
     else if (packet_data = get_packet(event, "CURRENT"))
     {
@@ -137,6 +163,25 @@ socket.onclose = function (event) {
 socket.onerror = function (error) {
     console.log(`[error] ${error.message}`);
 };
+
+let roomsInterval = null;
+
+
+
+function showRooms()
+{
+    document.getElementsByClassName("rooms")[0].classList.remove("hide")
+    roomsInterval = setInterval(() => {
+        socket.send("ROOMS");
+    }, 777);
+
+}
+
+function hideRooms()
+{
+    document.getElementsByClassName("rooms")[0].classList.add("hide")
+    clearInterval(roomsInterval);
+}
 
 function showChat()
 {
