@@ -38,11 +38,18 @@ body
 }
 .Cases:hover
 {
-    background-color: rgba(255, 255, 255, 0.651);
-    border-color: white;
+    border-color: rgba(18, 205, 230);
     border-style: solid;
     outline: none;
     border-width: 2px;
+    background-color: rgba(18, 205, 230, 0.381);
+    box-shadow:
+    0 0 7px #fff,
+    0 0 10px #fff,
+    0 0 42px rgb(18, 205, 230),
+    0 0 77px rgb(18, 205, 230),
+    0 0 100px rgb(18, 205, 230);
+
 }
 .hide {
     display: none;
@@ -143,84 +150,6 @@ header
     border-color: white;
     box-shadow: 10 0 100px #9ecaed;
 }
-
-#L1C2,#L3C2
-{
-    border-left-style: solid;
-    border-left-color: white;
-    border-left-width: 2px;
-    border-right-style: solid;
-    border-right-color: white;
-    border-right-width: 2px;
-    box-shadow: 0 0 20px#9ecaed;   
-}
-#L2C2
-{
-    border-style: solid;
-    border-width: 2px;
-    outline: none;
-    border-color: white;
-    box-shadow: 0 0 20px #9ecaed;    
-}
-#L2C1,#L2C3
-{
-    border-bottom-style: solid;
-    border-bottom-color: white;
-    border-bottom-width: 2px;
-    border-top-style: solid;
-    border-top-color: white;
-    border-top-width: 2px;
-    outline: none;
-    box-shadow: 0 0 20px #9ecaed;
-}
-#L1C1
-{
-    border-top-left-radius: 10px;
-    border-style: none;
-    border-bottom-style: solid;
-    border-bottom-color: white;
-    border-bottom-width: 2px;
-    border-right-style: solid;
-    border-right-color: white;
-    border-right-width: 2px;
-    box-shadow: 0 0 20px #9ecaed;
-}
-#L1C3
-{
-    border-top-right-radius: 10px;
-    border-style: none;
-    border-bottom-style: solid;
-    border-bottom-color: white;
-    border-bottom-width: 2px;
-    border-left-style: solid;
-    border-left-color: white;
-    border-left-width: 2px;
-    box-shadow: 0 0 20px #9ecaed;
-}
-#L3C1
-{
-    border-bottom-left-radius: 10px;
-    border-style: none;
-    border-top-style: solid;
-    border-top-color: white;
-    border-top-width: 2px;
-    border-right-style: solid;
-    border-right-color: white;
-    border-right-width: 2px;
-    box-shadow: 0 0 20px #9ecaed;
-}
-#L3C3
-{
-    border-bottom-right-radius: 10px;
-    border-style: none;
-    border-top-style: solid;
-    border-top-color: white;
-    border-top-width: 2px;
-    border-left-style: solid;
-    border-left-color: white;
-    border-left-width: 2px;
-    box-shadow: 0 0 20px #9ecaed;
-}
 .square {
     margin: auto;
     max-height: 80vh;
@@ -228,10 +157,6 @@ header
     aspect-ratio: 1/1;
     /*background: #326384;*/
   }
-#L1C1:hover,#L1C2:hover,#L1C3:hover,#L2C1:hover,#L2C2:hover,#L2C3:hover,#L3C1:hover,#L3C2:hover,#L3C3:hover
-{
-    box-shadow: 0 0 50px 10px #9ecaed;
-}
 .btn_page
 {
     text-align: center;

@@ -1,12 +1,6 @@
 body
 {
     background-color: black;
-
-}
-#table
-{
-    max-height: max-content;
-    aspect-ratio: 1/1;
 }
 #titre
 {
@@ -98,7 +92,7 @@ td a
     display: block;
     height: 100%;
 }
-.pages
+#table
 {
     vertical-align: middle;
 }
