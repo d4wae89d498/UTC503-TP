@@ -51,6 +51,7 @@ class Board
 class BoardGame : public Board
 {
     public:
+    short   player_count;
     bool    currentPlayer;
     Player  players[2];
     int     moves;
@@ -64,6 +65,7 @@ class BoardGame : public Board
     {
         currentPlayer = 0;
         moves = 0;
+        player_count = 0;
     }
 
     Player *getCurrentPlayer()

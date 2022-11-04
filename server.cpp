@@ -51,6 +51,44 @@ void send_score(void *client)
 void onclose(ws_cli_conn_t *client)
 {
     char *addr;
+
+    if (games[client]->player_count <= 1)
+    {
+        games[client]->player_count = 0;
+    }
+    else
+    {
+        if (games[client]->players[0].addr == client)
+        {
+
+            char *msg3;
+            asprintf(&msg3, "PSEUDO%i-%s (%c)", 0, games[client]->players[1].name, 0 ? 'x' : 'o');
+            ws_sendframe_txt((ws_cli_conn_t *)games[client]->players[1].addr, msg3);
+            free(msg3);
+
+            asprintf(&msg3, "PSEUDO%i-VIDE(%c)", 1, 1 ? 'x' : 'o');
+            ws_sendframe_txt((ws_cli_conn_t *)games[client]->players[1].addr, msg3);
+            free(msg3);
+
+            asprintf(&msg3, "SCORE%i-%i", 0, 0);
+            ws_sendframe_txt((ws_cli_conn_t *)games[client]->players[1].addr, msg3);
+            free(msg3);
+
+            asprintf(&msg3, "SCORE%i-%i", 1, 0);
+            ws_sendframe_txt((ws_cli_conn_t *)games[client]->players[1].addr, msg3);
+            free(msg3);
+
+            ws_sendframe_txt((ws_cli_conn_t *)games[client]->players[1].addr, "OPPONENT_DISCON");
+
+            games[client]->players[0] = games[client]->players[1];
+            games[client]->players[1].name = 0;
+            
+        }
+        games[client]->player_count = 1;
+    }
+
+    games.erase(client);
+
     addr = ws_getaddress(client);
     printf("Client disconnected : %s[%p]\n", addr, client);
 }
@@ -66,7 +104,27 @@ void onmessage(ws_cli_conn_t *client, const unsigned char *msg, uint64_t size, i
     {
         games[client]->players[0].name = strdup(packet_data);
         games[client]->players[0].addr = client;
+        games[client]->player_count += 1;
         printf("New name '%s'\n", strdup(games[client]->players[0].name));
+    }
+    else if (packet_data = get_packet(msg, "ROOMS"))
+    {
+        string rooms = "";
+        for (auto it = games.begin(); it != games.end(); ++it)
+        {
+            //cin << it->second->players
+            rooms.append("ROOM-");
+            if (it->second->players[0].name )   
+                rooms.append(it->second->players[0].name);
+            if (it->second->player_count > 1)
+            {
+                rooms.append("-");
+                if (it->second->players[1].name )   
+                    rooms.append(it->second->players[1].name);
+            }
+            rooms.append("\n");
+        }
+        ws_sendframe_txt(client, rooms.c_str());
     }
     else if ((packet_data = get_packet(msg, "OPPONENT")))
     {
@@ -85,6 +143,7 @@ void onmessage(ws_cli_conn_t *client, const unsigned char *msg, uint64_t size, i
                 it->second->players[1].name = strdup(games[client]->players[0].name);
                 games[client] = it->second;
                 it->second->players[1].addr = client;
+                it->second->player_count += 1;
 
                 printf("NEW MATCH: %s vs %s\n", it->second->players[0].name, it->second->players[1].name);
 
