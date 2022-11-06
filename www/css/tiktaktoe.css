@@ -1,6 +1,6 @@
 body
 {
-    background-image: url('background.jpg');
+    background-image: url('../img/background.jpg');
     background-size: 100%;
     margin: 0;
 }

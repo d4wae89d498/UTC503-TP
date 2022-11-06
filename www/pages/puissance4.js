@@ -1,7 +1,11 @@
-<!DOCTYPE html>
+class Puissance4Page
+{
+    render()
+    {
+        `<!DOCTYPE html>
 <html lang="fr">
 <head>
-    <link rel="stylesheet" href="puissance4.css">
+    <link rel="stylesheet" href="css/puissance4.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +14,7 @@
     <header>
         <table id="entete">
             <tr>
-                <td id="btn_page0" class = "pages" ><a class="btn_page" href="menujeux.html">Jeux</a></td>
+                <td id="btn_page0" class = "pages" ><a class="btn_page" href="index.html">Jeux</a></td>
                 <td id="btn_page1" class = "pages" onclick="showChat()">Chat</td>
                 <td id="btn_page1" class = "pages" onclick="showRooms()">Salles</td>
                 <td id="btn_page2" class = "pages" onclick="showChat()">Nouvelle partie</td>
@@ -87,3 +91,6 @@
           </div>
     </body>
 </html>
+`;
+    }
+}
