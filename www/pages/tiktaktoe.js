@@ -14,7 +14,7 @@ function get_packet(event, type) {
     return (0);
 }
 
-function onDestroyTikTakToe(){
+function onDestroyTikTakToe() {
     if (socket)
         socket.close();
     socket = null;
@@ -23,9 +23,9 @@ function onDestroyTikTakToe(){
 }
 
 
-function onRenderTikTakToe(){
+function onRenderTikTakToe() {
     socket = new WebSocket("ws://127.0.0.1:8080");
-    
+
     socket.onopen = (e) => {
         console.log("[open] Connection established");
         if (!name.length) {
@@ -35,7 +35,7 @@ function onRenderTikTakToe(){
         }
     };
 
-    socket.onmessage =  (event) => {
+    socket.onmessage = (event) => {
         let packet_data;
         console.log(`[message] Data received from server: ${event.data}`);
         // HANDLE THE UUID BASED AUTH - TOKEN0123456789
@@ -142,15 +142,15 @@ function onRenderTikTakToe(){
         console.log(`[error] ${error.message}`);
     };
     console.log("cases:");
-        var i = 0;
-        while (i < document.getElementsByClassName("Cases").length) {
-            document.getElementsByClassName("Cases")[i].onclick = function () {
-                let s = this.id.split("C");
-                s[0] = s[0].replace('L', "");
-                socket.send("MOVE" + s[0] + "-" + s[1]);
-            }
-            i += 1;
+    var i = 0;
+    while (i < document.getElementsByClassName("Cases").length) {
+        document.getElementsByClassName("Cases")[i].onclick = function () {
+            let s = this.id.split("C");
+            s[0] = s[0].replace('L', "");
+            socket.send("MOVE" + s[0] + "-" + s[1]);
         }
+        i += 1;
+    }
 
 };
 
@@ -224,32 +224,30 @@ class TikTakToePage {
         ${await (((await fetch('css/tiktaktoe.css'))).text())}
     </style> 
 
-    {${new MenuComponent()}}
-    
-    <div class="menu hide" >
-        <button onclick="hideMenu()">X</button>
-        <div class="menuitems">
-            <br/>
-            <center>
-                <h1>Menu</h1>
-                <br/>
-                <br/>
-                <ul>
-                    <li><a href="#"><strong>Morpion</strong></a></li>
-                    <li><a href="#">Puissance 4</a></li>
-                </ul>
-            </center> 
-        </div>
-    </div>
-    
-    <footer>
-    </footer>
-    <script>
-        endPage();
-    </script>
+    ${new MenuComponent()}
+          <div class="square">
+            <table id="grille" border="1">
+                <tr id ="L1">
+                    <td id="L1C1" class ="Cases"></td>
+                    <td id="L1C2" class ="Cases"></td>
+                    <td id="L1C3" class ="Cases"></td>
+                </tr>
+                <tr id ="L2">
+                    <td id="L2C1" class ="Cases"></td>
+                    <td id="L2C2" class ="Cases"></td>
+                    <td id="L2C3" class ="Cases"></td>
+                </tr>
+                <tr id ="L3">
+                    <td id="L3C1" class ="Cases"></td>
+                    <td id="L3C2" class ="Cases"></td>
+                    <td id="L3C3" class ="Cases"></td>
+                </tr>
+            </table>
+          </div>
+   
         `;
         this.onRender();
         onRenderTikTakToe();
-       
+
     };
 }

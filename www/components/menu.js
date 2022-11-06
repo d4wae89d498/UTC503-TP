@@ -1,21 +1,14 @@
 class MenuComponent {
     id = null;
 
-    guid() {
-        function s4() {
-            return Math.floor((1 + Math.random()) * 0x10000)
-                .toString(16)
-                .substring(1);
-        }
-        return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-            s4() + '-' + s4() + s4() + s4();
-    }
+
 
     toString() {
         if (!this.id)
-            this.id = this.guid();
+            this.id = guid();
         return `;
         <header id="D${this.id}">
+        <center>
            <table id="entete">
                 <tr>
                     <td id="btn_page0" class = "pages" ><a class="btn_page" href="/">Jeux</a></td>
@@ -25,7 +18,7 @@ class MenuComponent {
                  </tr>
         
              </table>
-            <div class="pages" style="margin:auto;" onclick="promptOpponent()">
+            <div class="pages" style="margin:auto;">
             <br/>
                 <center style="color: white;">
                     <span id="score0">0</span><span class="pseudo0" id="pseudo0"></span>
@@ -59,26 +52,7 @@ class MenuComponent {
             </div>
             <input type="text"/><button style="display:inline-block">ENVOYER</button>
         </div>
-          <div class="square">
-            <table id="grille" border="1">
-                <tr id ="L1">
-                    <td id="L1C1" class ="Cases"></td>
-                    <td id="L1C2" class ="Cases"></td>
-                    <td id="L1C3" class ="Cases"></td>
-                </tr>
-                <tr id ="L2">
-                    <td id="L2C1" class ="Cases"></td>
-                    <td id="L2C2" class ="Cases"></td>
-                    <td id="L2C3" class ="Cases"></td>
-                </tr>
-                <tr id ="L3">
-                    <td id="L3C1" class ="Cases"></td>
-                    <td id="L3C2" class ="Cases"></td>
-                    <td id="L3C3" class ="Cases"></td>
-                </tr>
-            </table>
-          </div>
-       
+            </center>
         </header>
         `;
     }

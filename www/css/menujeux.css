@@ -32,11 +32,10 @@ body
 }
 header
 {
-    width: 100%;
-    margin: auto;
-    aspect-ratio: 1/1;
-    max-width: 100vh;
-    max-height: 20vh;
+    margin-left: auto;
+    margin-right: auto;
+    height: 8vh;
+    margin-top: -20px;
 }
 #Morpion,#Puissance4
 {
