@@ -2,7 +2,7 @@ body
 {
     background-image: url('../img/background.jpg');
     background-size: 100%;
-    margin: 0;
+ /*   margin: 450 !important; */
 }
 
 .current {
