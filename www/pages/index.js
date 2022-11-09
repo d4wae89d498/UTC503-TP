@@ -3,16 +3,6 @@ class IndexPage
     matchPathname;
     onRender;
 
-    checkPathname()
-    {
-        if (window.location.pathname == this.matchPathname)
-        {
-            this.render();
-            return true;
-        }
-        return false;
-    }
-
     constructor(webRoot, onRender)
     {
         this.matchPathname = webRoot;
@@ -22,6 +12,16 @@ class IndexPage
                 e.stopImmediatePropagation();
         }.bind(this))
         this.checkPathname();
+    }
+    
+    checkPathname()
+    {
+        if (window.location.pathname == this.matchPathname)
+        {
+            this.render();
+            return true;
+        }
+        return false;
     }
 
     render()
