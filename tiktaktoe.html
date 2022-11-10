@@ -42,30 +42,32 @@
             </center> 
         </div>
     </div>
-    <div class="rooms hide" >
-        <button onclick="hideRooms()">X</button>
+    <div class="rooms" >
+        <h1 id="titresalles"style="display: inline-block; margin-top: 0;margin-bottom: 0; ">Salles</h1>
+        <button style="vertical-align: top;float: right;" onclick="hideRooms()">X</button>
         <div class="menuitems">
             <br/>
             <center>
-                <h1>Salles</h1>
                 <br/>
                 <br/>
                 <ul id="rooms_list">
-                    <li> . . .</li>
+                    <li> Marc's room</li>
+                    <li> Alexis's room</li>
+                    <li> Jeremy's room</li>
+                    <li> Professor's room</li>
                 </ul>
             </center> 
         </div>
     </div>
         <div class="chat hide" >
-            <button onclick="hideChat()">X</button>
-            <br/>
-            <center>
-                <h1>Messages</h1>
-            </center>
+            <button id="btnhidechat" class="intromenuchat" onclick="hideChat()">X</button>
+                <h1 id="titrechat" class="intromenuchat">Messages</h1>
             <div class="messages">
                 
-            </div>
+            </div>^
+            <center>
             <input type="text"/><button style="display:inline-block">ENVOYER</button>
+            </center>
         </div>
           <div class="square">
             <table id="grille" border="1">
