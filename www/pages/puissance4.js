@@ -1,32 +1,8 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <link rel="stylesheet" href="puissance4.css">
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Puissance 4</title>
-</head>
-    <header>
-        <table id="entete">
-            <tr>
-                <td id="btn_page0" class = "pages" ><a class="btn_page" href="menujeux.html">Jeux</a></td>
-                <td id="btn_page1" class = "pages" onclick="showChat()">Chat</td>
-                <td id="btn_page1" class = "pages" onclick="showRooms()">Salles</td>
-                <td id="btn_page2" class = "pages" onclick="showChat()">Nouvelle partie</td>
-            </tr>
-        
-        </table>
-        <div class="pages" style="margin:auto;" onclick="promptOpponent()">
-        <br/>
-        <center style="color: white;">
-            <span id="score0">0</span><span class="pseudo0" id="pseudo0"></span>
-            <span class="pseudo1" id="pseudo1"></span> <span id="score1">0</span>
-        </center>
-        <br/>
-        </div>
-    </header>
-    <body>
+class Puissance4Page
+{
+    render()
+    {
+        `
         <div class="square">
             <table id="grille" border="1">
                 <tr id ="L1">
@@ -85,5 +61,7 @@
                 </tr>
             </table>
           </div>
-    </body>
-</html>
+   
+`;
+    }
+}
