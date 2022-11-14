@@ -4,7 +4,6 @@ let name;
 let opponent;
 let roomsInterval;
 
-
 function initCommonProtocolSocket(url)
 {
     let socket = new WebSocket(url);

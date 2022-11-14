@@ -34,7 +34,6 @@ void send_score(void *client)
     int i = 0;
     while (i < 2)
     {
-
         int y = 0;
         while (y < 2)
         {
