@@ -1,20 +1,6 @@
 class TikTakToePage extends Page
 {
  //   init;
-
-    destroyTikTakToekSocket()
-    {
-        if (this.tikTakToeSocket)
-            this.tikTakToeSocket.close();
-        this.tikTakToeSocket = null;
-
-    }
-
-    initTikTakToeSocket()
-    {
-        this.tikTakToeSocket = initCommonProtocolSocket("ws://127.0.0.1:8080");
-    }
-    
     checkUrl()
     {
         if (webRoot + "tiktaktoe" == window.location.pathname)
@@ -65,4 +51,17 @@ class TikTakToePage extends Page
          </div>
         `;
     };
+ ///////
+    destroyTikTakToekSocket()
+    {
+        if (this.tikTakToeSocket)
+            this.tikTakToeSocket.close();
+        this.tikTakToeSocket = null;
+
+    }
+
+    initTikTakToeSocket()
+    {
+        this.tikTakToeSocket = initCommonProtocolSocket("ws://127.0.0.1:8080");
+    }
 }
