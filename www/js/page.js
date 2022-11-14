@@ -10,30 +10,31 @@ class Page
         }
     }
 
-    constructor()
+    constructor(container)
     {
+        this.container = container;
         window.addEventListener('nav::tick',  (e) => {this.updateIfCheckUrl(e)})
         this.updateIfCheckUrl();
     }
 
-    checkUrl()
+    /* virtual */ checkUrl()
     {
         return false;
     }
 
-    async afterUpdate()
+    /* virtual */ async afterUpdate()
     {
 
     }
 
-    async render()
+    /* virtual */ async render()
     {
         return ``;
     }
 
     async update()
     {
-        document.getElementById( window['appContainer'] ).innerHTML =  await this.render();
+        document.getElementById( this.container ).innerHTML =  await this.render();
         hookHyperLinks();
         await this.afterUpdate(); 
     }

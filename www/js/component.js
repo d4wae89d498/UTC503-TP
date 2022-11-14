@@ -1,4 +1,4 @@
-const componentIDPrefix = "D";
+const componentIDPrefix = "COMPONENT_";
 
 window['components'] = [];
 
@@ -16,13 +16,13 @@ class Component
         window['components'][this.uid] = this;
     }
 
-    async render()
+    /* virtual */ async render()
     {
         return ``;
     }
 
 
-    async afterUpdate()
+    /* virtual */ async afterUpdate()
     {
 
     }

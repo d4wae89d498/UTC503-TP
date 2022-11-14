@@ -2,10 +2,9 @@ class App
 {
     constructor(container, pages)
     {
-        window['appContainer'] = container;
-        for (let i in pages)
+        for (const i in pages)
         {
-            new pages[i]();
+            new pages[i](container);
         }
     }
 }
