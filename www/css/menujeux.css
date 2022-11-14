@@ -95,3 +95,13 @@ td a
 {
     vertical-align: middle;
 }
+
+.pseudo0, .pseudo1
+{
+    margin: 5px;
+}
+
+.pseudo1
+{
+    margin-left: 20px;
+}

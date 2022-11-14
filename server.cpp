@@ -129,7 +129,7 @@ void onmessage(ws_cli_conn_t *client, const unsigned char *msg, uint64_t size, i
     else if ((packet_data = get_packet(msg, "OPPONENT")))
     {
         // dont allow same player twice
-        if (!strcmp(packet_data, games[client]->players[0].name))
+        if (!games[client]->players[0].name || !strcmp(packet_data, games[client]->players[0].name))
         {
             ws_sendframe_txt(client, "OPPONENT_NOT_FOUND");
             return;

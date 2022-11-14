@@ -1,14 +1,6 @@
 class NotFoundPage
 {
-    onRender;
-    
-    constructor(webRoot, onRender)
-    {
-        this.onRender = onRender;
-        window.addEventListener('nav::tick', function(e) {
-            this.render();
-        }.bind(this))
-    }
+
 
     render()
     {
@@ -20,6 +12,5 @@ class NotFoundPage
                 </font>        
             </center>
         `
-        this.onRender();
     };
 }
