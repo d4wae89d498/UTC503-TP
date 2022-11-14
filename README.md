@@ -11,4 +11,4 @@ Par Jérémy, Alexis, Marc
 
 TODO :
 
-- claean global components var clean + bug checks + puissance4
+- claean global components var + bug checks + puissance4
