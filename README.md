@@ -7,3 +7,8 @@ Par Jérémy, Alexis, Marc
 - User interface : HTML / CSS
 - Communication Protocol : WebSocket
 - Thrid party primitives :  + home made front-end lib
+
+
+TODO :
+
+- claean global components var clean + bug checks + puissance4
