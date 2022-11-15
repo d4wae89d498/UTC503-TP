@@ -22,6 +22,21 @@ class TikTakToePage extends Page
         }
     }
 
+
+    destroyTikTakToekSocket()
+    {
+        if (this.tikTakToeSocket)
+            this.tikTakToeSocket.close();
+        this.tikTakToeSocket = null;
+
+    }
+
+    initTikTakToeSocket()
+    {
+    	console.log("server=", server_tiktaktoe);
+        this.tikTakToeSocket = initCommonProtocolSocket(server_tiktaktoe);
+    }
+
     async render()
     {
         return `
@@ -50,17 +65,4 @@ class TikTakToePage extends Page
          </div>
         `;
     };
- ///////
-    destroyTikTakToekSocket()
-    {
-        if (this.tikTakToeSocket)
-            this.tikTakToeSocket.close();
-        this.tikTakToeSocket = null;
-
-    }
-
-    initTikTakToeSocket()
-    {
-        this.tikTakToeSocket = initCommonProtocolSocket("ws://127.0.0.1:8080");
-    }
 }

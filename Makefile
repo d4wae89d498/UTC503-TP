@@ -1,4 +1,4 @@
-CFLAGS		=-g -fsanitize=address#-Wall -Werror -Wextra
+CFLAGS		=-std=c++11 -g #-fsanitize=address#-Wall -Werror -Wextra
 CSRCS		=server.cpp
 COBJS		=$(CSRCS:.cpp=.o)
 CLIBS		=wsServer/libws.a
@@ -9,7 +9,7 @@ TSRCS		=tiktaktoe.ts
 TOBJS		=$(TSRCS:.ts=.js)
 #export PATH=/usr/local/opt/llvm/bin:$PATH
 #clang --target=wasm32 --no-standard-libraries -Wl,--export-all -Wl,--no-entry -o player.wasm player.cpp
-all: Makefile server client
+all: Makefile server #client
 submodules:
 	make -C wsServer
 submodules_fclean:

@@ -4,6 +4,9 @@
 #include <ws.h>
 #include <iostream>
 #include <time.h>
+#include <string.h>
+
+#include <memory>
 
 #include "tiktaktoe.cpp"
 
