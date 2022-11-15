@@ -6,8 +6,6 @@ Par Jérémy, Alexis, Marc
 - Client : JS ECMAScript 2015 wihout any external lib (the entire front-end framework is home-made)
 - User interface : HTML / CSS
 - Communication Protocol : WebSocket
-- Thrid party primitives :  + home made front-end lib
-
 
 TODO :
 
