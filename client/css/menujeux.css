@@ -1,0 +1,107 @@
+body
+{
+    background-color: black;
+}
+#titre
+{
+    font-family: monospace;
+    color: white;
+    text-align: center;
+    text-shadow:
+    0 0 7px #fff, 
+    0 0 10px #fff, 
+    0 0 42px rgb(18, 205, 230),   
+    0 0 77px rgb(18, 205, 230), 
+    0 0 100px rgb(18, 205, 230)
+}
+#titre2
+{
+    font-family: monospace;
+    color: white;
+    text-align: center;
+    text-shadow:
+    0 0 7px #fff, 
+    0 0 10px #fff, 
+    0 0 42px rgb(230, 18, 124),
+    0 0 77px rgb(230, 18, 124),
+    0 0 100px rgb(230, 18, 124);
+}
+#hautdepage
+{
+    line-height: 50px;
+}
+header
+{
+    margin-left: auto;
+    margin-right: auto;
+    height: 8vh;
+    margin-top: -20px;
+}
+#Morpion,#Puissance4
+{
+    border-style: solid;
+    border-color: #fff;
+    border-radius: 5px;
+    border-width: 2px;
+    text-decoration:none;
+    text-align: center;
+    font-size: xx-large;
+    height: 20em;
+    width: 100em;
+}
+.bouton
+{
+    color: #fff;
+    text-decoration: none;
+}
+#Puissance4:hover
+{
+    box-shadow:
+    0 0 7px #fff,
+    0 0 10px #fff,
+    0 0 42px rgb(230, 18, 124),
+    0 0 77px rgb(230, 18, 124),
+    0 0 100px rgb(230, 18, 124);
+    background-color: rgba(230, 18, 124, 0.381);
+    text-shadow:
+    0 0 7px #fff, 
+    0 0 10px #fff, 
+    0 0 42px rgb(230, 18, 124),
+    0 0 77px rgb(230, 18, 124),
+    0 0 100px rgb(230, 18, 124);
+}
+#Morpion:hover
+{
+    background-color: rgba(18, 205, 230, 0.381);
+    box-shadow:
+    0 0 7px #fff,
+    0 0 10px #fff,
+    0 0 42px rgb(18, 205, 230),
+    0 0 77px rgb(18, 205, 230),
+    0 0 100px rgb(18, 205, 230);
+    text-shadow:
+    0 0 7px #fff, 
+    0 0 10px #fff, 
+    0 0 42px rgb(18, 205, 230),
+    0 0 77px rgb(18, 205, 230),
+    0 0 100px rgb(18, 205, 230);
+}
+td a
+{
+    display: block;
+    height: 100%;
+}
+#table
+{
+    vertical-align: middle;
+}
+
+.pseudo0, .pseudo1
+{
+    margin: 5px;
+}
+
+.pseudo1
+{
+    margin-left: 20px;
+}

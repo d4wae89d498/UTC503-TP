@@ -1,0 +1,130 @@
+body
+{
+    background-image:url('../img/backgroundP4.png');
+    background-size:100%;
+    background-repeat: repeat-y;
+    background-attachment: fixed;
+    height:100%;
+    width:100%;
+    margin: 0;
+}
+.pages
+{
+    background-color: rgba(173, 216, 230, 0.381);
+    width: 10em;
+}
+.btn_page
+{
+    text-align: center;
+    color: #fff;
+    text-decoration:none
+}
+#btn_page0, #btn_page1,#btn_page2
+{
+    height: 20px;
+    border: 1px;
+    
+    border-color: lightgrey;
+    border-style:solid;
+   
+  /*  width: 33%;*/
+    background-color: rgba(173, 216, 230, 0.381);
+    text-align: center;
+    color: #fff;
+}
+#btn_page0:hover, #btn_page1:hover,#btn_page1:hover,#btn_page2:hover
+{
+    background-color: rgb(230, 18, 124, 0.381);
+    box-shadow:
+    0 0 7px #fff,
+    0 0 10px #fff,
+    0 0 42px rgb(230, 18, 124),
+    0 0 77px rgb(230, 18, 124),
+    0 0 100px rgb(230, 18, 124);
+    text-shadow:
+    0 0 7px #fff, 
+    0 0 10px #fff, 
+    0 0 42px rgb(230, 18, 124),
+    0 0 77px rgb(230, 18, 124),
+    0 0 100px rgb(230, 18, 124);
+}
+#btn_page0
+{
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+#btn_page2
+{
+    border-top-right-radius: 0.2cm;
+    border-bottom-right-radius: 10px;
+}
+#entete
+{
+    width: 100%;
+}
+td a
+{
+    
+    display: block;
+    height: 100%;
+}
+.Cases
+{
+
+    background-color: rgba(255, 255, 255, 0.253);
+
+   
+    border-style: none;
+    border-bottom-style: solid;
+    border-bottom-color: white;
+    border-bottom-width: 2px;
+    border-right-style: solid;
+    border-right-color: white;
+    border-right-width: 2px;
+    box-shadow: 0 0 20px #9ecaed;
+    text-align: center;
+    color: #fff;
+    font-size: 150px;
+    font-family: monospace;
+  
+}
+.Cases:hover
+{
+    background-color: rgb(230, 18, 124, 0.381);
+    border-color: white;
+    border-style: solid;
+    outline: none;
+    border-width: 2px;
+    box-shadow:
+    0 0 7px #fff,
+    0 0 10px #fff,
+    0 0 42px rgb(230, 18, 124),
+    0 0 77px rgb(230, 18, 124),
+    0 0 100px rgb(230, 18, 124);
+}
+.square {
+    margin: auto;
+    max-height: 80vh;
+    max-width: 80vh;
+    aspect-ratio: 1/1;
+    /*background: #326384;*/
+  }
+#grille
+{
+   width: 100%;
+   height: 100%;
+    
+    margin: auto;
+    border-collapse: collapse;
+    border-color: lightpink;
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 2px;
+    outline: none;
+    border-color: white;
+    box-shadow: 10 0 100px #9ecaed;
+}
+span
+{
+    display: inline-block;
+}

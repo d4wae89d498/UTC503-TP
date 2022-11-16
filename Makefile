@@ -1,33 +1,19 @@
-CFLAGS		=-std=c++11 -g -fsanitize=address#-Wall -Werror -Wextra
-CSRCS		=server.cpp
-COBJS		=$(CSRCS:.cpp=.o)
-CLIBS		=wsServer/libws.a
-CINCLUDES	=-IwsServer/include
+CFLAGS	=	-I./server/wsServer/include -std=c++11 -g -fsanitize=address #-Wall -Werror -Wextra
+DEPS = Makefile $(shell ls server/*.hpp) server/wsServer/libws.a
 
-TFLAGS		=--module es2015
-TSRCS		=tiktaktoe.ts
-TOBJS		=$(TSRCS:.ts=.js)
-#export PATH=/usr/local/opt/llvm/bin:$PATH
-#clang --target=wasm32 --no-standard-libraries -Wl,--export-all -Wl,--no-entry -o player.wasm player.cpp
-all: Makefile server #client
+all: tiktaktoe_server puissance4_server
 submodules:
-	make -C wsServer
-submodules_fclean:
-	make -C wsServer clean
-%.o: %.cpp submodules server.h
-	clang++ $(CFLAGS) $(CINCLUDES) -c $< -o $@ -IwsServer
-%.js: %.ts
-	tsc $(TFLAGS) $<
-server: $(COBJS)
-	clang++ $(CFLAGS) $(COBJS) $(CLIBS) -o $@
-client: $(TOBJS)
+	make -C server/wsServer
+submodules_clean:
+	make -C server/wsServer clean
+tiktaktoe_server:	server/tiktaktoe.cpp submodules $(DEPS) 
+	clang++ $(CFLAGS) $< server/wsServer/libws.a -o $@
+puissance4_server: server/puissance4.cpp submodules  $(DEPS) 
+	clang++ $(CFLAGS) $< server/wsServer/libws.a -o $@
 clean:
-	rm -rf $(COBJS)
-fclean: clean submodules_fclean
-#	rm -rf $(TOBJS)
-#	rm -rf server
-re: fclean all
-.PHONY: clean fclean re all submodules submodules_fclean client
+	rm -rf tiktaktoe_server puissance4_server
+re: clean all
+.PHONY: clean re all submodules submodules_clean
 .SUFFIXES:
 
 

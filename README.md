@@ -7,6 +7,14 @@ Par Jérémy, Alexis, Marc
 - User interface : HTML / CSS
 - Communication Protocol : WebSocket
 
+Usage : (requires an UNIX OS)
+- git clone .... UTC503-TP && cd UTC503-TP && make
+- ./tiktaktoe_server (keep server open and don't close the terminal)
+- open a new terminal, cd client && php -S 127.0.0.1:8667 (this is a nice way to open a local HTTP server, you may also use NGINX, Appache or anything else)
+- open a browser and navigate to http://127.0.0.1:8667
+
 TODO :
 
-- claean global components var + bug checks + puissance4
+- [ ] clean global components var in front end framework
+- [ ] tiktaktoe refactor
+- [ ] puissance4

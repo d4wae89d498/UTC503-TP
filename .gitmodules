@@ -1,9 +1,0 @@
-[submodule "wsServer"]
-	path = wsServer
-	url = https://github.com/Theldus/wsServer
-[submodule "www/js/nav.js"]
-	path = www/js/nav.js
-	url = https://github.com/fwe49783uip8/nav.js
-[submodule "www/js/hook.js"]
-	path = www/js/hook.js
-	url = https://github.com/fwe49783uip8/hook.js
