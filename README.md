@@ -11,9 +11,9 @@ Demo : https://tsdretouches.fr/UTC503-TP/client
 
 Usage : 
 
-- git clone https://github.com/d4wae89d498/UTC503-TP && cd UTC503-TP && make
-- ./tiktaktoe_server    (or/and ./puissance4_server)
-- cd client && php -S 127.0.0.1:8667
+- $ git clone https://github.com/d4wae89d498/UTC503-TP && cd UTC503-TP && make
+- $ ./tiktaktoe_server &   (or/and ./puissance4_server &)
+- $ cd client && php -S 127.0.0.1:8667
 - open a browser and navigate to http://127.0.0.1:8667
 
 TODO :
