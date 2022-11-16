@@ -22,7 +22,6 @@ class TikTakToePage extends Page
         }
     }
 
-
     destroyTikTakToekSocket()
     {
         if (this.tikTakToeSocket)
@@ -41,7 +40,7 @@ class TikTakToePage extends Page
     {
         return `
         <style>
-            ${await (((await fetch('css/tiktaktoe.css'))).text())}
+            ${await (((await fetch(webRoot + 'css/tiktaktoe.css'))).text())}
         </style> 
         ${await new TopMenu().renderOuterHtml()}
         <div class="square">

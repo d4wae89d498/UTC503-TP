@@ -1,26 +1,29 @@
 
 let id;
-let name;
+let name = localStorage.getItem("name") ?? "";
 let opponent;
 let roomsInterval;
+let socket;
+
+function askName()
+{
+    name = prompt("Choisissez un pseudonyme : ", name);
+    socket.send("NAME" + name);        
+    localStorage.setItem("name", name);
+}
 
 function initCommonProtocolSocket(url)
 {
-    let socket = new WebSocket(url);
+    socket = new WebSocket(url);
     console.log("socket: ", socket);
 
     id = "-1";
-    name = localStorage.getItem("name") ?? "";
     opponent = "";
     roomsInterval = null;
 
     socket.onopen = (e) => {
         console.log("[open] Connection established");
-        if (!name.length) {
-            name = prompt("Choisissez un pseudonyme : ", name);
-            socket.send("NAME" + name);
-            document.getElementsByClassName("pseudo0")[0].innerText = name;
-        }
+        askName(); 
     };
 
     window['chooseOp'] = (str) => {
@@ -40,12 +43,16 @@ function initCommonProtocolSocket(url)
     socket.onmessage = (event) => {
         let packet_data;
         console.log(`[message] Data received from server: ${event.data}`);
-        // HANDLE THE UUID BASED AUTH - TOKEN0123456789
-        if (packet_data = get_packet(event, "TOKEN") !== 0)
-            localStorage.setItem("token", packet_data);
-        else if (packet_data = get_packet(event, "ROOM")) {
+        if (packet_data = get_packet(event, "NAME_IN_USE")) {
+            alert("Le nom est deja utilise !");
+            askName();
+        }
+        else if (packet_data = get_packet(event, "NAME_ACK")) {
+            document.getElementsByClassName("pseudo0")[0].innerText = name;
+        } 
+        else if (packet_data = get_packet(event, "ROOM-")) {
             let html = "";
-            let rooms = packet_data.split("ROOM-").splice(1);
+            let rooms = packet_data.split("ROOM-");
             for (const i in rooms) {
                 let names = rooms[i].split("-");
                 if (names.length == 1)

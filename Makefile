@@ -1,4 +1,4 @@
-CFLAGS		=-std=c++11 -g #-fsanitize=address#-Wall -Werror -Wextra
+CFLAGS		=-std=c++11 -g -fsanitize=address#-Wall -Werror -Wextra
 CSRCS		=server.cpp
 COBJS		=$(CSRCS:.cpp=.o)
 CLIBS		=wsServer/libws.a

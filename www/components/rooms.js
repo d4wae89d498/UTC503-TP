@@ -35,10 +35,7 @@ class Rooms extends Component
                 <br/>
                 <br/>
                 <ul id="rooms_list">
-                    <li> Marc's room</li>
-                    <li> Alexis's room</li>
-                    <li> Jeremy's room</li>
-                    <li> Professor's room</li>
+                    <li>  ... </li>
                 </ul>
             </center> 
         </div> 
