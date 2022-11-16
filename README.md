@@ -9,9 +9,14 @@ Par Jérémy, Alexis, Marc
 
 Demo : https://tsdretouches.fr/UTC503-TP/client
 
-UNIX Usage : 
 
-- $ git clone https://github.com/d4wae89d498/UTC503-TP --recursive && cd UTC503-TP && make
+
+### UNIX Usage : 
+
+- $ git clone https://github.com/d4wae89d498/UTC503-TP --recursive && cd UTC503-TP
+
+then compile and run with :
+- $ make
 - $ ./tiktaktoe_server & 
 - $ ./puissance4_server &
 - $ cd client && php -S 127.0.0.1:8667
@@ -23,7 +28,7 @@ or :
 open a browser and navigate to http://127.0.0.1:8667
 
 
-TODO :
+### TODO :
 
 - [ ] clean global components var in front end framework
 - [ ] tiktaktoe refactor
