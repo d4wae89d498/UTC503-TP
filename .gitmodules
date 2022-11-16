@@ -1,0 +1,12 @@
+[submodule "server/wsServer"]
+	path = server/wsServer
+	url = https://github.com/Theldus/wsServer
+[submodule "client/js/client.js"]
+	path = client/js/client.js
+	url = https://github.com/fwe49783uip8/nav.js
+[submodule "client/js/nav.js"]
+	path = client/js/nav.js
+	url = https://github.com/fwe49783uip8/nav.js
+[submodule "client/js/hook.js"]
+	path = client/js/hook.js
+	url = https://github.com/fwe49783uip8/hook.js
