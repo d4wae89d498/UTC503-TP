@@ -1,4 +1,4 @@
-#define PORT 8080
+#define PORT 8020
 #define GAME_TYPE Puissance4
 
 #include "puissance4.hpp"

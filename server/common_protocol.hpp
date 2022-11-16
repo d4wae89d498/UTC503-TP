@@ -18,7 +18,7 @@ using namespace std;
 # define GAME_TYPE BoardGame
 #endif
 
-char *get_packet(const unsigned char *msg, char *type)
+char *get_packet(const unsigned char *msg, const char *type)
 {
     if (!strncmp((char *)msg, type, strlen(type)))
         return (char *)msg + strlen(type);
@@ -132,6 +132,7 @@ void onclose(ws_cli_conn_t *client)
 
 void onmessage(ws_cli_conn_t *client, const unsigned char *msg, uint64_t size, int type)
 {
+    (void)size;
     (void)type;
     char *addr;
     addr = ws_getaddress(client);
@@ -154,7 +155,7 @@ void onmessage(ws_cli_conn_t *client, const unsigned char *msg, uint64_t size, i
         printf("\t- NAME (%s)\n", packet_data);
         ws_sendframe_txt(client, "NAME_ACK");
     }
-    else if (packet_data = get_packet(msg, "ROOMS"))
+    else if ((packet_data = get_packet(msg, "ROOMS")))
     {
         string rooms = "";
       
@@ -173,7 +174,7 @@ void onmessage(ws_cli_conn_t *client, const unsigned char *msg, uint64_t size, i
         }
         ws_sendframe_txt(client, rooms.c_str());
     }
-    else if (packet_data = get_packet(msg, "OPPONENT"))
+    else if ((packet_data = get_packet(msg, "OPPONENT")))
     {
         auto opponent = findByName(packet_data);
 

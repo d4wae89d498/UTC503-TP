@@ -1,4 +1,4 @@
-CFLAGS	=	-I./server/wsServer/include -std=c++11 -g -fsanitize=address #-Wall -Werror -Wextra
+CFLAGS	=	-I./server/wsServer/include -std=c++11 -Wall -Werror -Wextra -g -fsanitize=address
 DEPS = Makefile $(shell ls server/*.hpp) server/wsServer/libws.a
 
 all: tiktaktoe_server puissance4_server
@@ -10,6 +10,10 @@ tiktaktoe_server:	server/tiktaktoe.cpp submodules $(DEPS)
 	clang++ $(CFLAGS) $< server/wsServer/libws.a -o $@
 puissance4_server: server/puissance4.cpp submodules  $(DEPS) 
 	clang++ $(CFLAGS) $< server/wsServer/libws.a -o $@
+dev: all 
+	./tiktaktoe_server &
+	./puissance4_server &
+	cd client && php -S 127.0.0.1:8667
 clean:
 	rm -rf tiktaktoe_server puissance4_server
 re: clean all

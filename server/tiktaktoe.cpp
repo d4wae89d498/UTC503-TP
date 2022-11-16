@@ -1,4 +1,4 @@
-#define PORT 8080
+#define PORT 8030
 #define GAME_TYPE TikTakToe
 
 #include "tiktaktoe.hpp"

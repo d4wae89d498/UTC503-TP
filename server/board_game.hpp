@@ -36,6 +36,9 @@ class BoardGame
 
     virtual     game_state handleMove(unsigned int x, unsigned int y, char c)
     {
+        (void)x;
+        (void)y;
+        (void)c;
         assert(0);
         return ILLEGAL_MOVE;
     }
@@ -96,6 +99,8 @@ class BoardGame
     {
         return &players[currentPlayerIndex];
     }
+
+    virtual ~BoardGame() = default;
 };
 
 

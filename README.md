@@ -15,7 +15,11 @@ UNIX Usage :
 - $ ./tiktaktoe_server & 
 - $ ./puissance4_server &
 - $ cd client && php -S 127.0.0.1:8667
-- open a browser and navigate to http://127.0.0.1:8667
+or :
+- $ make dev
+
+open a browser and navigate to http://127.0.0.1:8667
+
 
 TODO :
 
