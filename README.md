@@ -7,10 +7,13 @@ Par Jérémy, Alexis, Marc
 - User interface : HTML / CSS
 - Communication Protocol : WebSocket
 
-Usage : (requires an UNIX OS)
-- git clone .... UTC503-TP && cd UTC503-TP && make
-- ./tiktaktoe_server (keep server open and don't close the terminal)
-- open a new terminal, cd client && php -S 127.0.0.1:8667 (this is a nice way to open a local HTTP server, you may also use NGINX, Appache or anything else)
+Demo : https://tsdretouches.fr/UTC503-TP/client
+
+Usage : 
+
+- git clone https://github.com/d4wae89d498/UTC503-TP UTC503-TP && cd UTC503-TP && make
+- ./tiktaktoe_server    (or ./puissance4_server)
+- cd client && php -S 127.0.0.1:8667
 - open a browser and navigate to http://127.0.0.1:8667
 
 TODO :
