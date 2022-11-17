@@ -45,9 +45,11 @@
     <script>
 	    
         // const server_tiktaktoe = "wss://tsdretouches.fr:8090";
-        const dev = false;
+        const dev = true;
+        const server_tiktaktoe = "ws://127.0.0.1:8030";
+        	const server_puissance4 = "ws://127.0.0.1:8020";
 
-	if (dev)
+	/*if (dev)
 	{
 		const server_tiktaktoe = "ws://127.0.0.1:8030";
         	const server_puissance4 = "ws://127.0.0.1:8020";
@@ -56,7 +58,7 @@
 	{
 		const server_tiktaktoe = "wss://shaiya.fr:3000";
         	const server_puissance4 = "wss://shaiya.fr:3010";
-	}
+	}*/
         new App("AppContainer", [
             IndexPage,
             TikTakToePage,
