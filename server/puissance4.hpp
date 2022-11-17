@@ -19,7 +19,7 @@ class Puissance4 : public BoardGame
                     total += 1;
                 y += 1;
             }
-            if (total == 3)
+            if (total == 4)
                 return true;
             i += 1;
         }
@@ -39,7 +39,7 @@ class Puissance4 : public BoardGame
                     total += 1;
                 y += 1;
             }
-            if (total == 3)
+            if (total == 4)
                 return true;
             i += 1;
         }

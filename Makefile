@@ -1,4 +1,4 @@
-CFLAGS	=	-I./server/wsServer/include -std=c++11 -Wall -Werror -Wextra -g -fsanitize=address
+CFLAGS	=	-I./server/wsServer/include -std=c++11 -g -fsanitize=address
 DEPS = Makefile $(shell ls server/*.hpp) server/wsServer/libws.a
 
 all: tiktaktoe_server puissance4_server

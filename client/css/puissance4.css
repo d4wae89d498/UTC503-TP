@@ -1,6 +1,6 @@
 body
 {
-    background-image:url('../img/backgroundP4.png');
+    background-image:url('./img/backgroundP4.png');
     background-size:100%;
     background-repeat: repeat-y;
     background-attachment: fixed;
@@ -17,6 +17,7 @@ body
 
     width: 4em !important;
     height: 4em !important;
+    aspect-ratio: 1/1;
     border-style: none;
     border-bottom-style: solid;
     border-bottom-color: white;
@@ -27,7 +28,7 @@ body
     box-shadow: 0 0 20px #9ecaed;
     text-align: center;
     color: #fff;
-    font-size: 50px;
+    font-size: 30px;
     font-family: monospace;
   
 }
