@@ -33,7 +33,7 @@ ou bien plus simplement :
 
 - $ make dev
 
-Ouvrez ensuite un navigateur est nvagiguez vers http://127.0.0.1:8667
+Ouvrez ensuite un navigateur est naviguez vers http://127.0.0.1:8667
 
 
 Bon jeu !
