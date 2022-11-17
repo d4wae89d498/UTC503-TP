@@ -17,6 +17,8 @@ class Puissance4 : public BoardGame
             {
                 if (cases[i][y] == playerSymbol)
                     total += 1;
+                else 
+                    total = 0;
                 y += 1;
             }
             if (total == 4)
@@ -37,6 +39,8 @@ class Puissance4 : public BoardGame
             {
                 if (cases[y][i] == playerSymbol)
                     total += 1;
+                else 
+                    total = 0;
                 y += 1;
             }
             if (total == 4)
