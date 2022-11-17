@@ -10,7 +10,7 @@ Par Jérémy, Alexis, Marc
 Demo : https://tsdretouches.fr/UTC503-TP/client
 
 
-**UNIX Usage : **
+**UNIX Usage :**
 
 - $ git clone https://github.com/d4wae89d498/UTC503-TP --recursive && cd UTC503-TP
 
