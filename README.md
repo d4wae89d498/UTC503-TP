@@ -3,7 +3,7 @@
 Par Jérémy, Alexis, Marc
 
 - Serveur : C++ 11 avec [wsServer](https://github.com/Theldus/wsServer) comme seule lib
-- Client : JS ECMAScript 2015 outil pour l'extrémité avant. L'extrémité avant est fait-maison.
+- Client : JS ECMAScript 2015 outil pour l'extrémité avant. L'extrémité avant est faite maison.
 - Interface utilisateur : HTML / CSS
 - Protocole de communication : WebSocket
 
