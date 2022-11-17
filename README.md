@@ -22,18 +22,18 @@ Par Jérémy, Alexis, Marc
 
 - $ git clone https://github.com/d4wae89d498/UTC503-TP --recursive && cd UTC503-TP
 
-Compilation :
+puis :
 
 - $ make
 - $ ./tiktaktoe_server & 
 - $ ./puissance4_server &
 - $ cd client && php -S 127.0.0.1:8667
 
-ou bien :
+ou bien plus simplement :
 
 - $ make dev
 
-Ouvrez un navigateur est nvagiguez vers http://127.0.0.1:8667
+Ouvrez ensuite un navigateur est nvagiguez vers http://127.0.0.1:8667
 
 
 Bon jeu !
