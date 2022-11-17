@@ -9,7 +9,7 @@ Par Jérémy, Alexis, Marc
 - Testé sur : Ubuntu 20.04 avec WSL ; Debian 11; MacOS 10.13; MacOS 10.15
 
 **Démo:**
-- https://shaiya.fr/UTC503-TP/client
+- https://shaiya.fr/UTC503-TP/client  (attention: le CNAM bloque les ports 3000 et 3010 utilisés dans cette démo)
 
 **Depédances Ubuntu:**
 
