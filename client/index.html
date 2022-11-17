@@ -31,6 +31,8 @@
     <!-- PAGES -->
     <script src="pages/index.js"></script>
     <script src="pages/tiktaktoe.js"></script>
+    <script src="pages/puissance4.js"></script>
+
     <script src="pages/not_found.js"></script>
 
     <!-- NETWORK GRID GAMES PRIMITIVES -->
@@ -44,9 +46,12 @@
 	    
         // const server_tiktaktoe = "wss://tsdretouches.fr:8090";
         const server_tiktaktoe = "ws://127.0.0.1:8030";
+        const server_puissance4 = "ws://127.0.0.1:8020";
+
         new App("AppContainer", [
             IndexPage,
             TikTakToePage,
+            Puissance4Page,
             NotFoundPage 
         ])
     </script>

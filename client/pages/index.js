@@ -17,7 +17,7 @@ class IndexPage extends Page
             <table>
                 <tr>
                     <td  id="Morpion" class = "pages"><span><a class="bouton" href="tiktaktoe">Morpion</a></span></td>
-                    <td  id="Puissance4" class = "pages"><a class="bouton" href="puissance4.html">Puissance 4</a></td>
+                    <td  id="Puissance4" class = "pages"><a class="bouton" href="puissance4">Puissance 4</a></td>
                 </tr>
             </table>
         </div>`;
