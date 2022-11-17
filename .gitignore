@@ -5,3 +5,5 @@
 *.dSYM
 tiktaktoe_server
 puissance4_server
+.vscode
+.idea
