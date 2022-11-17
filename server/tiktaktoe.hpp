@@ -115,25 +115,26 @@ class TikTakToe : public BoardGame
         (void) c;
         if (x > max_x || y > max_y)
             return ILLEGAL_MOVE;
-        if (cases[x][y] != EMPTY_CASE)
+        if (cases[y][x] != EMPTY_CASE)
             return ILLEGAL_MOVE;
         if (!bothPlayerConnected)
             return ILLEGAL_MOVE;
         char playerSymbol = getSymbol(*currentPlayer());     
-        cases[x][y] = playerSymbol;
+        cases[y][x] = playerSymbol;
+        draw();
         moves += 1;
-        if (equal())
+        if (win(playerSymbol))
+        {
+            currentPlayer()->score += 1;
+            moves = 0;
+            return (currentPlayer()->is_first ? PLAYER_1_WIN : PLAYER_2_WIN);
+        }
+        else if (equal())
         {
             players[0].score += 1;
             players[1].score += 1;
             moves = 0;
             return EQUAL;
-        }
-        else if (win(playerSymbol))
-        {
-            currentPlayer()->score += 1;
-            moves = 0;
-            return (currentPlayer()->is_first ? PLAYER_1_WIN : PLAYER_2_WIN);
         }
         rotate();
         return IN_PROGRESS;

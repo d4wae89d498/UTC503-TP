@@ -54,6 +54,21 @@ class SocketPlayer
         ws_sendframe_txt(conn, str.c_str()); 
     }
 
+    void sendMove(int x, int y, char c)
+    {
+        (void) c;
+        string packet = string("MOVE") + (gamePlayerIndex != game->currentPlayerIndex ? "0" : "1") + "-" + to_string(y + 1) + "-" + to_string(x + 1);
+        ws_sendframe_txt(conn, packet.c_str());
+    }
+
+    void sendCurrent()
+    {
+        if (gamePlayerIndex == game->currentPlayerIndex)
+            ws_sendframe_txt(conn, "CURRENT0");
+        else
+            ws_sendframe_txt(conn, "CURRENT1");
+    }
+
     void setOpponent(SocketPlayer *new_opponent)
     {
         // check if opponent is not playing with someone already
@@ -81,8 +96,10 @@ class SocketPlayer
         game->start();
         sendNames();
         sendScores();
+        sendCurrent();
         opponent->sendNames();
         opponent->sendScores();
+        opponent->sendCurrent();
     }
 };
 
@@ -191,6 +208,83 @@ void onmessage(ws_cli_conn_t *client, const unsigned char *msg, uint64_t size, i
 
         clients[client].setOpponent(opponent);
         
+    }
+    else if ((packet_data = get_packet(msg, "MOVE")))
+    {
+        int y;
+        int x;
+        game_state s;
+
+        if (sscanf(packet_data, "%i-%i", &y, &x) != 2)
+            return ;
+        y -= 1;
+        x -= 1;
+        if (x < 0 || y < 0)
+            return ;
+        if (clients[client].game->currentPlayerIndex != clients[client].gamePlayerIndex)
+        {
+            ws_sendframe_txt(client, "NOT_YOU");
+            return ;
+        }
+        s = clients[client].game->handleMove(x, y, '-');
+        if (s == ILLEGAL_MOVE)
+        {
+             ws_sendframe_txt(client, "ILLEGAL");     
+            return ;
+        }
+        // send move :: 
+        clients[client].sendMove(x, y, '-');
+        clients[client].sendCurrent();
+
+        clients[client].opponent->sendMove(x, y, '-');
+        clients[client].opponent->sendCurrent(); 
+        
+        if (s == EQUAL) 
+        {
+            clients[client].sendScores();
+            ws_sendframe_txt(client, "EQUAL");
+        }
+        else if (s == PLAYER_1_WIN)
+        {
+            clients[client].sendScores();
+            clients[client].opponent->sendScores();
+
+            if (clients[client].gamePlayerIndex == 0)
+            {
+                ws_sendframe_txt(client, "WINNER");
+                ws_sendframe_txt(clients[client].opponent->conn, "LOOSER");
+            }
+            else 
+            {
+                ws_sendframe_txt(client, "LOOSER");
+                ws_sendframe_txt(clients[client].opponent->conn, "WINNER");  
+            }
+           
+        }
+        else if (s == PLAYER_2_WIN)  
+        {
+            clients[client].sendScores();
+            clients[client].opponent->sendScores();
+
+            if (clients[client].gamePlayerIndex == 1)
+            {
+                ws_sendframe_txt(client, "WINNER");
+                ws_sendframe_txt(clients[client].opponent->conn, "LOOSER");
+            }
+            else 
+            {
+                ws_sendframe_txt(client, "LOOSER");
+                ws_sendframe_txt(clients[client].opponent->conn, "WINNER");  
+            }
+        }
+        else if (s == IN_PROGRESS)
+        {
+
+        }
+        else 
+        {
+            printf ("ERROR : unknow game_state %x\n", s);
+        }
     }
     //else if (packet_data = )
    

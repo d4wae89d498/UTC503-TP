@@ -20,14 +20,17 @@ body
     color: gray;
 }
 
-#pseudo0.current {
-    color: rgb(230, 18, 124) !important;
-}
-
-#pseudo1.current {
+.rond_p
+{
     color: rgb(18, 205, 230) !important;
+
 }
 
+.croix_p
+{
+    color: rgb(230, 18, 124) !important;
+
+}
 
 .Cases
 {

@@ -4,6 +4,7 @@ let name = localStorage.getItem("name") ?? "";
 let opponent;
 let roomsInterval;
 let socket = null;
+let moves = 0;
 
 function askName()
 {
@@ -14,8 +15,7 @@ function askName()
 
 function initCommonProtocolSocket(url)
 {
-    if (socket == null)
-        socket = new WebSocket(url);
+    socket = new WebSocket(url);
     console.log("socket: ", socket);
 
     id = "-1";
@@ -28,7 +28,13 @@ function initCommonProtocolSocket(url)
     };
 
     window['chooseOp'] = (str) => {
-        socket.send("OPPONENT" + str);
+        let rooms = document.getElementsByClassName("roomc"); 
+        for (const i in rooms)
+        {
+            if (rooms[i].classList)
+                rooms[i].classList.add('hide')
+        }
+        socket.send("OPPONENT"+str);
     }
 
     window['askRooms'] = (str) => {
@@ -57,7 +63,7 @@ function initCommonProtocolSocket(url)
             for (const i in rooms) {
                 let names = rooms[i].split("-");
                 if (names.length == 1)
-                    html += `<li><a href="#" onclick="chooseOp(this.innerText)">${names[0]}</a></li>`;
+                    html += `<li><a href="#" class="roomc" onclick="chooseOp(this.innerText)">${names[0]}</a></li>`;
                 else {
                     console.log(names);
                     html += `<li>${names[0]} - ${names[1]}</li>`;
@@ -68,6 +74,23 @@ function initCommonProtocolSocket(url)
         // SET PLAYER POSITIONS (first or second) - CURRENT0 or CURRENT1
         else if (packet_data = get_packet(event, "CURRENT")) {
             id = packet_data;
+            
+            if (id && !moves)
+            {
+                document.getElementById("pseudo0").classList.remove("croix_p");
+                document.getElementById("pseudo0").classList.add("rond_p");
+
+                document.getElementById("pseudo1").classList.remove("rond_p");
+                document.getElementById("pseudo1").classList.add("croix_p"); 
+            }
+            else 
+            {
+                 document.getElementById("pseudo0").classList.remove("rond_p");
+                document.getElementById("pseudo0").classList.add("croix_p");
+
+                document.getElementById("pseudo1").classList.remove("croix_p");
+                document.getElementById("pseudo1").classList.add("rond_p");  
+            }
             document.getElementById("pseudo0").classList.remove("current");
             document.getElementById("pseudo1").classList.remove("current");
             document.getElementById("pseudo" + (id)).classList.add("current");
@@ -80,13 +103,15 @@ function initCommonProtocolSocket(url)
             let s = packet_data.split("-");
 
 
-            document.getElementById("L" + s[1] + "C" + s[2]).innerText = (s[0] == "0" ? "o" : "x");
-            if (s[0] == "0") {
+            document.getElementById("L" + s[1] + "C" + s[2]).innerText = (!(moves % 2) ? "x" : "o");
+            if (!(moves % 2)) {
                 document.getElementById("L" + s[1] + "C" + s[2]).classList.add("croix");
             }
             else {
                 document.getElementById("L" + s[1] + "C" + s[2]).classList.add("rond");
             }
+
+            moves += 1;
             // add class croix et class rond
         }
         // HANDLE A SCORE : SCORE1-2 for setting score of 1 to 2

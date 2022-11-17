@@ -5,7 +5,7 @@
 class Puissance4 : public BoardGame
 {
     ushort moves = 0;
-
+public:
     game_state handleMove(unsigned int x, unsigned int y, char c)
     {
         (void) x;
