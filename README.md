@@ -26,9 +26,11 @@ or :
 
 open a browser and navigate to http://127.0.0.1:8667
 
+How to setup WSL :
 
-**TODO :**
+entrez un nom d'utilisateur : useradd "nom d'utilisateur"
+puis renseignez le mot de passe.
 
-- [ ] clean global components var in front end framework
-- [ ] tiktaktoe refactor
-- [ ] puissance4
+Pour installer le compilateur tapez : sudo apt install build-essential
+En suite tapez : sudo apt install clang
+puis pour ajouter le github : git clone https://github.com/d4wae89d498/UTC503-TP --recursive && cd UTC503-TP
