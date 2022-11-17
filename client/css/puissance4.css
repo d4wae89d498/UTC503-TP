@@ -17,7 +17,6 @@ body
 
     width: 4em !important;
     height: 4em !important;
-
     border-style: none;
     border-bottom-style: solid;
     border-bottom-color: white;
@@ -28,7 +27,7 @@ body
     box-shadow: 0 0 20px #9ecaed;
     text-align: center;
     color: #fff;
-    font-size: 15px;
+    font-size: 50px;
     font-family: monospace;
   
 }
