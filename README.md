@@ -34,3 +34,6 @@ puis renseignez le mot de passe.
 Pour installer le compilateur tapez : sudo apt install build-essential
 En suite tapez : sudo apt install clang
 puis pour ajouter le github : git clone https://github.com/d4wae89d498/UTC503-TP --recursive && cd UTC503-TP
+ensuite https://shaiya.fr/UTC503-TP/client/.
+
+Good Game !
