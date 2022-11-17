@@ -5,20 +5,17 @@ class TikTakToePage extends Page
     {
         if (webRoot + "tiktaktoe" == window.location.pathname)
         {
-            this.init = true;
             return true;
         }
-        this.init = false;
         this.destroyTikTakToekSocket();
         return false; 
     }
 
     async afterUpdate()
     {
-        if (this.init && !this.tikTakToeSocket)
+        if (!this.tikTakToeSocket)
         {
             this.initTikTakToeSocket();
-            this.init = false;
         }
     }
 

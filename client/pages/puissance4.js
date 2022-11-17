@@ -5,20 +5,17 @@ class Puissance4Page extends Page
     {
         if (webRoot + "puissance4" == window.location.pathname)
         {
-            this.init = true;
             return true;
         }
-        this.init = false;
         this.destroyPuissance4kSocket();
         return false; 
     }
 
     async afterUpdate()
     {
-        if (this.init && !this.Puissance4Socket)
+        if (!this.Puissance4Socket)
         {
             this.initPuissance4Socket();
-            this.init = false;
         }
     }
 
