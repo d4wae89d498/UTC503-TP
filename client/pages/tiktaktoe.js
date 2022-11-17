@@ -15,7 +15,7 @@ class TikTakToePage extends Page
 
     async afterUpdate()
     {
-        if (this.init)
+        if (this.init && !this.initTikTakToeSocket)
         {
             this.initTikTakToeSocket();
             this.init = false;

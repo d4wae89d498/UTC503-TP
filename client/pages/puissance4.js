@@ -15,7 +15,7 @@ class Puissance4Page extends Page
 
     async afterUpdate()
     {
-        if (this.init)
+        if (this.init && !this.Puissance4Socket)
         {
             this.initPuissance4Socket();
             this.init = false;
