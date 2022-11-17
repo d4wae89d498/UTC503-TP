@@ -16,6 +16,8 @@ function askName()
 
 function initCommonProtocolSocket(url)
 {
+    if (socket)
+        return ;
     socket = new WebSocket(url);
     console.log("socket: ", socket);
 

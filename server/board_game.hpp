@@ -72,8 +72,14 @@ class BoardGame
 
     void start()
     {
-        players[currentPlayerIndex].is_first = ! players[currentPlayerIndex].is_first;
-        players[!currentPlayerIndex].is_first = ! players[!currentPlayerIndex].is_first; 
+        if (players[0].is_first)
+            currentPlayerIndex = 1;
+        else 
+            currentPlayerIndex = 0;
+
+        players[0].is_first = ! players[0].is_first;
+        players[1].is_first = ! players[1].is_first; 
+
         int x = 0;
         while (x <= max_x)
         {

@@ -7,6 +7,7 @@ class IndexPage extends Page
 
     render()
     {
+        socket = null;
         return `<header>
             <div id="hautdepage">
                 <h1 id="titre">Le passe temps du CNAM</h1>      
