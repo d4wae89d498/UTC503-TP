@@ -10,8 +10,7 @@ Par Jérémy, Alexis, Marc
 Demo : https://tsdretouches.fr/UTC503-TP/client
 
 
-
-### UNIX Usage : 
+**UNIX Usage :**
 
 - $ git clone https://github.com/d4wae89d498/UTC503-TP --recursive && cd UTC503-TP
 
@@ -28,7 +27,7 @@ or :
 open a browser and navigate to http://127.0.0.1:8667
 
 
-### TODO :
+**TODO :**
 
 - [ ] clean global components var in front end framework
 - [ ] tiktaktoe refactor
