@@ -1,6 +1,6 @@
 
 let id;
-let name = localStorage.getItem("name") ?? "";
+let name = localStorage.getItem("name") ? localStorage.getItem("item") : "";
 let opponent;
 let roomsInterval;
 let socket = null;

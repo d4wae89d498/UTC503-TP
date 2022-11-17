@@ -246,6 +246,7 @@ void onmessage(ws_cli_conn_t *client, const unsigned char *msg, uint64_t size, i
         {
             clients[client].sendScores();
             ws_sendframe_txt(client, "EQUAL");
+            ws_sendframe_txt(clients[client].opponent->conn, "EQUAL");
         }
         else if (s == PLAYER_1_WIN || s == PLAYER_2_WIN)
         {
