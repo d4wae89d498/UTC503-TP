@@ -12,7 +12,7 @@ int main(void)
     evs.onopen = &onopen;
     evs.onclose = &onclose;
     evs.onmessage = &onmessage;
-    printf("Starting TIKTAKTOE server on port %i\n", PORT);
+    printf("Starting PUISSANCE4 server on port %i\n", PORT);
     ws_socket(&evs, PORT, 0, 1000);
     return (0);
 }
