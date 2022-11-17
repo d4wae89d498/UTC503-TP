@@ -183,7 +183,7 @@ function initCommonProtocolSocket(url)
             alert("Mouvement interdit! Merci de jouer ailleurs");
         }
         else if (packet_data = get_packet(event, "NOT_YOU")) {
-            alert("CE n;est pas votre tour! Merci d'attendre votre tour");
+            alert("Ce n'est pas votre tour! Merci d'attendre votre tour");
         }
     };
     socket.onclose = (event) => {
@@ -200,6 +200,11 @@ function initCommonProtocolSocket(url)
     var i = 0;
     while (i < document.getElementsByClassName("Cases").length) {
         document.getElementsByClassName("Cases")[i].onclick = function () {
+            if (!document.getElementById("pseudo0").innerText.length || !document.getElementById("pseudo1").innerText.length)
+            {
+                alert("Merci de choisir un joueur via le menu \"Salles\"");
+                return ;
+            }
             //alert('clicked')
             let s = this.id.split("C");
             s[0] = s[0].replace('L', "");
