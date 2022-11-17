@@ -17,8 +17,12 @@ class IndexPage extends Page
         <div id="table">
             <table>
                 <tr>
-                    <td  id="Morpion" class = "pages"><span><a class="bouton" href="tiktaktoe">Morpion</a></span></td>
-                    <td  id="Puissance4" class = "pages"><a class="bouton" href="puissance4">Puissance 4</a></td>
+                    <td  id="Morpion" class = "pages"><a class="bouton" href="tiktaktoe"><span>Morpion</span><br/>
+                        <img src="./img/tiktaktoe.png" style="width: 40vw; max-width: 400px; aspect-ratio: 1/1;" /></a>
+                    </td>
+                    <td  id="Puissance4" class = "pages"><a class="bouton" href="puissance4"><span>Puissance 4</span><br/>
+                        <img src="./img/puissance4.jpg" style="width: 40vw; max-width: 400px; aspect-ratio: 1/1;" /></a>
+                    </td>
                 </tr>
             </table>
         </div>`;
