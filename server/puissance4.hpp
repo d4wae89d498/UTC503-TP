@@ -46,6 +46,56 @@ class Puissance4 : public BoardGame
         return false;
     }
 
+    bool chekDiagonalB(char playerSymbol)
+    {
+        (void) playerSymbol;
+        int x = 0;
+        while (x <= max_x)
+        {
+           int count = 0;
+            int y = max_y;
+            while (y <= max_y - x)
+            {
+                if (cases[y][x + y] == playerSymbol)
+                {
+                    count += 1;
+                    if (count == 4)
+                        return true;
+                }
+                else 
+                    count = 0;
+                y += 1;
+            }
+            x += 1;
+        }
+        return false;
+    }
+
+    bool chekDiagonalA(char playerSymbol)
+    {
+        (void) playerSymbol;
+        int x = 0;
+        while (x <= max_x)
+        {
+           int count = 0;
+            int y = 0;
+            while (y <= x)
+            {
+                if (cases[y][x - y] == playerSymbol)
+                {
+                    count += 1;
+                    if (count == 4)
+                        return true;
+                }
+                else 
+                    count = 0;
+                y += 1;
+            }
+            x += 1;
+        }
+        return false;
+    }
+
     bool equal()
     {
         if(moves == (max_x + 1) * (max_y + 1))
@@ -57,7 +107,7 @@ class Puissance4 : public BoardGame
 
     bool win(char playerSymbol)
     {
-        if (checkLines(playerSymbol) || checkColumns(playerSymbol))
+        if (checkLines(playerSymbol) || checkColumns(playerSymbol) || chekDiagonalA(playerSymbol) || checkDiagonalB(playerSymbol))
             return true;
         return false;
     }
@@ -66,8 +116,8 @@ class Puissance4 : public BoardGame
 
     Puissance4() 
     {
-        max_x = 7;
-        max_y = 6;
+        max_x = 6;
+        max_y = 5;
     }
 
     static char getSymbol(Player p)
@@ -80,6 +130,7 @@ class Puissance4 : public BoardGame
      */ 
     game_state handleMove(unsigned int x, unsigned int y, char c)
     {
+        printf("MoVE!!\n");
         (void) c;
         if (x > max_x || y > max_y)
             return ILLEGAL_MOVE;
@@ -88,12 +139,13 @@ class Puissance4 : public BoardGame
         if (!bothPlayerConnected)
             return ILLEGAL_MOVE;
         ushort p = 0;
-        while (p <= y)
+        while (p <= max_y)
         {
-            if (cases[p][x] != EMPTY_CASE)
+            if (cases[p][x] == EMPTY_CASE && p > y)
             {
+                printf("illegal : y=%i x=%i p=%i\n", y, x, p);
                 return ILLEGAL_MOVE;
-            }
+            }   
             p += 1;
         }
         char playerSymbol = getSymbol(*currentPlayer());     

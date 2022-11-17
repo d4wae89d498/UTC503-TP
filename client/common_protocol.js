@@ -189,6 +189,7 @@ function initCommonProtocolSocket(url)
     var i = 0;
     while (i < document.getElementsByClassName("Cases").length) {
         document.getElementsByClassName("Cases")[i].onclick = function () {
+            //alert('clicked')
             let s = this.id.split("C");
             s[0] = s[0].replace('L', "");
             socket.send("MOVE" + s[0] + "-" + s[1]);
