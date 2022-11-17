@@ -11,9 +11,9 @@ class TopMenu extends Component
                 <table id="entete">
                     <tr>
                         <td id="btn_page0" class = "pages" ><a class="btn_page" href="${webRoot}">Jeux</a></td>
-                        <td id="btn_page1" class = "pages" onclick="get_component('${chat.uid}').show()">Chat</td>
-                        <td id="btn_page1" class = "pages" onclick="get_component('${rooms.uid}').show()">Salles</td>
-                        <td id="btn_page2" class = "pages" onclick="socket.send('NEW')">Nouvelle partie</td>
+                        <td id="btn_page1" class = "pages" onclick="get_component('${chat.uid}').show()" href="">Chat</td>
+                        <td id="btn_page1" class = "pages" onclick="get_component('${rooms.uid}').show()" href="">Salles</td>
+                        <td id="btn_page2" class = "pages" onclick="socket.send('NEW')" href="">Nouvelle partie</td>
                     </tr>
                 </table>
                 <div class="pages" style="margin:auto;">

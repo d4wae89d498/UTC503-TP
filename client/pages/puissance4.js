@@ -5,18 +5,15 @@ class Puissance4Page extends Page
     {
         if (webRoot + "puissance4" == window.location.pathname)
         {
+            this.afterUpdate = () =>
+            {
+                if (!this.Puissance4Socket)
+                    this.Puissance4Socket = initCommonProtocolSocket(server_puissance4);
+            }
             return true;
         }
         this.destroyPuissance4kSocket();
         return false; 
-    }
-
-    async afterUpdate()
-    {
-        if (!this.Puissance4Socket)
-        {
-            this.initPuissance4Socket();
-        }
     }
 
     destroyPuissance4kSocket()
@@ -25,12 +22,6 @@ class Puissance4Page extends Page
             this.Puissance4Socket.close();
         this.Puissance4Socket = null;
 
-    }
-
-    initPuissance4Socket()
-    {
-    	console.log("server=", server_puissance4);
-        this.Puissance4Socket = initCommonProtocolSocket(server_puissance4);
     }
 
     async render()

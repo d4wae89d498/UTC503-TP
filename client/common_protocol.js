@@ -41,7 +41,8 @@ function initCommonProtocolSocket(url)
     }
 
     window['askRooms'] = (str) => {
-        socket.send("ROOMS");
+        if (socket)
+            socket.send("ROOMS");
     }
 
 
@@ -66,13 +67,23 @@ function initCommonProtocolSocket(url)
             for (const i in rooms) {
                 let names = rooms[i].split("-");
                 if (names.length == 1)
-                    html += `<li><a href="#" class="roomc" onclick="chooseOp(this.innerText)" ondblclick="function(e){e.preventDefault();e.stopImmediatePropagation(); return false;}">${names[0]}</a></li>`;
+                    html += `<li><a href="" class="roomc">${names[0]}</a></li>`;
                 else {
                     console.log(names);
                     html += `<li>${names[0]} - ${names[1]}</li>`;
                 }
             }
             document.getElementById("rooms_list").innerHTML = html;
+            let roomsLinks =document.getElementsByClassName("roomc"); 
+            for (const i in roomsLinks)
+            {
+                roomsLinks[i].onclick = function(e) {
+                    chooseOp(this.innerText);
+                    e.preventDefault();
+                    e.stopImmediatePropagation();
+                    return false; 
+                }
+            }
         }
         // SET PLAYER POSITIONS (first or second) - CURRENT0 or CURRENT1
         else if (packet_data = get_packet(event, "CURRENT")) {

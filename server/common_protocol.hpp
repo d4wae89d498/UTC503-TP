@@ -205,7 +205,8 @@ void onmessage(ws_cli_conn_t *client, const unsigned char *msg, uint64_t size, i
     else if ((packet_data = get_packet(msg, "OPPONENT")))
     {
         auto opponent = findByName(packet_data);
-
+        if (!opponent)
+            return ;
         clients[client].setOpponent(opponent);
         
     }

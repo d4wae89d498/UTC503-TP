@@ -3,6 +3,8 @@ function hookHyperLinks() {
     for (let key in a_tags) {
         a_tags[key].onclick = function (e) {
             console.log("href : ", this.href);
+            if (!this.href.length)
+                return false;
             window.history.pushState({}, '', this.href);
             e.preventDefault();
             e.stopImmediatePropagation();

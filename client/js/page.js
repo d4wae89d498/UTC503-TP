@@ -22,11 +22,6 @@ class Page
         return false;
     }
 
-    /* virtual */ async afterUpdate()
-    {
-
-    }
-
     /* virtual */ async render()
     {
         return ``;
@@ -35,8 +30,9 @@ class Page
     async update()
     {
         document.getElementById( this.container ).innerHTML =  await this.render();
+        if (this.afterUpdate)
+            this.afterUpdate(); 
         hookHyperLinks();
-        await this.afterUpdate(); 
     }
 
 }

@@ -5,18 +5,16 @@ class TikTakToePage extends Page
     {
         if (webRoot + "tiktaktoe" == window.location.pathname)
         {
+            this.afterUpdate = () =>
+            {
+                this.destroyTikTakToekSocket();
+                if (!this.tikTakToeSocket)
+                    this.tikTakToeSocket = initCommonProtocolSocket(server_tiktaktoe);           
+                }
             return true;
         }
         this.destroyTikTakToekSocket();
         return false; 
-    }
-
-    async afterUpdate()
-    {
-        if (!this.tikTakToeSocket)
-        {
-            this.initTikTakToeSocket();
-        }
     }
 
     destroyTikTakToekSocket()
@@ -25,12 +23,6 @@ class TikTakToePage extends Page
             this.tikTakToeSocket.close();
         this.tikTakToeSocket = null;
 
-    }
-
-    initTikTakToeSocket()
-    {
-    	console.log("server=", server_tiktaktoe);
-        this.tikTakToeSocket = initCommonProtocolSocket(server_tiktaktoe);
     }
 
     async render()
