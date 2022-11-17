@@ -2,37 +2,36 @@
 
 Par Jérémy, Alexis, Marc
 
-- Server : C++ 11 with [wsServer](https://github.com/Theldus/wsServer) as only external lib
-- Client : JS ECMAScript 2015 wihout any external lib (the entire front-end framework is home-made)
-- User interface : HTML / CSS
-- Communication Protocol : WebSocket
+- Serveur : C++ 11 avec [wsServer](https://github.com/Theldus/wsServer) comme seule lib
+- Client : JS ECMAScript 2015 outil pour l'extrémité avant. L'extrémité avant est fait-maison.
+- Interface utilisateur : HTML / CSS
+- Protocole de communication : WebSocket
 
-**UNIX Usage :**
+**Démo:**
+- https://shaiya.fr/UTC503-TP/client
+
+**Depédances Ubuntu:**
+
+- $ sudo apt install build-essential
+- $ sudo apt install update
+- $ sudo apt install clang
+- $ sudo apt install php (seule le serveur HTTP intégré est utilisé pour le développement, la démo utilise NGINX directement)
+
+**Utilisation (UNIX) :**
 
 - $ git clone https://github.com/d4wae89d498/UTC503-TP --recursive && cd UTC503-TP
 
-then compile and run with :
+Compilation :
+
 - $ make
 - $ ./tiktaktoe_server & 
 - $ ./puissance4_server &
 - $ cd client && php -S 127.0.0.1:8667
 
-or :
+ou bien :
 
 - $ make dev
+Ouvrez un navigateur est nvagiguez vers http://127.0.0.1:8667
 
-open a browser and navigate to http://127.0.0.1:8667
 
-How to setup WSL :
-
-entrez un nom d'utilisateur : useradd "nom d'utilisateur"
-puis renseignez le mot de passe.
-
-Pour installer le compilateur tapez : sudo apt install build-essential
-Puis : sudo apt update
-Ensuite tapez : sudo apt install clang
-Pour installer php : sudo apt install php
-puis pour ajouter le github : git clone https://github.com/d4wae89d498/UTC503-TP --recursive && cd UTC503-TP
-ensuite https://shaiya.fr/UTC503-TP/client/.
-
-Good Game !
+Bon jeu !
