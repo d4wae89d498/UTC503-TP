@@ -33,6 +33,7 @@ class BoardGame
     Player              players[2];
     bool                currentPlayerIndex = 0;
     bool                bothPlayerConnected = 0;
+    bool                locked = false;
 
     virtual     game_state handleMove(unsigned int x, unsigned int y, char c)
     {
@@ -62,13 +63,29 @@ class BoardGame
         }
     }
 
-
+    BoardGame()
+    {
+        currentPlayerIndex = rand() % 2;        
+        players[currentPlayerIndex].is_first = false;
+        players[!currentPlayerIndex].is_first = true;
+    }
 
     void start()
     {
-        currentPlayerIndex = rand() % 2;        
-        players[currentPlayerIndex].is_first = true;
-        players[!currentPlayerIndex].is_first = false;
+        players[currentPlayerIndex].is_first = ! players[currentPlayerIndex].is_first;
+        players[!currentPlayerIndex].is_first = ! players[!currentPlayerIndex].is_first; 
+        int x = 0;
+        while (x <= max_x)
+        {
+            int y = 0;
+            while (y <= max_y)
+            {
+                cases[y][x] = EMPTY_CASE;
+                y += 1;
+            }
+            x += 1;
+        }
+        locked = false;
     }
 
     void rotate()

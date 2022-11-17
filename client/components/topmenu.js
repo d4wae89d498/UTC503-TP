@@ -13,7 +13,7 @@ class TopMenu extends Component
                         <td id="btn_page0" class = "pages" ><a class="btn_page" href="/">Jeux</a></td>
                         <td id="btn_page1" class = "pages" onclick="get_component('${chat.uid}').show()">Chat</td>
                         <td id="btn_page1" class = "pages" onclick="get_component('${rooms.uid}').show()">Salles</td>
-                        <td id="btn_page2" class = "pages" onclick="showChat()">Nouvelle partie</td>
+                        <td id="btn_page2" class = "pages" onclick="socket.send('NEW')">Nouvelle partie</td>
                     </tr>
                 </table>
                 <div class="pages" style="margin:auto;">

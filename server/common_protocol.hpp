@@ -40,33 +40,33 @@ class SocketPlayer
 
     void sendNames()
     {
-        auto str = "PSEUDO0-" + string(name);
+        auto str = "PSEUDO" + to_string(gamePlayerIndex) +"-" + string(name);
         ws_sendframe_txt(conn, str.c_str());
-        str = "PSEUDO1-" + string(opponent && opponent->name ? opponent->name : "");
+        str = "PSEUDO" +to_string(!gamePlayerIndex) + "-" + string(opponent && opponent->name ? opponent->name : "");
         ws_sendframe_txt(conn, str.c_str());
     }
 
     void sendScores()
     { 
-        auto str = "SCORE0-" + to_string(game->players[gamePlayerIndex].score);
+        auto str = "SCORE" +to_string(gamePlayerIndex) +"-" + to_string(game->players[gamePlayerIndex].score);
         ws_sendframe_txt(conn, str.c_str());
-        str = "SCORE1-" + to_string(opponent ? game->players[opponent->gamePlayerIndex].score : 0);
+        str = "SCORE" + to_string(!gamePlayerIndex) +"-" + to_string(opponent ? game->players[opponent->gamePlayerIndex].score : 0);
         ws_sendframe_txt(conn, str.c_str()); 
     }
 
     void sendMove(int x, int y, char c)
     {
         (void) c;
-        string packet = string("MOVE") + (gamePlayerIndex != game->currentPlayerIndex ? "0" : "1") + "-" + to_string(y + 1) + "-" + to_string(x + 1);
+        string packet = string("MOVE") + to_string(game->currentPlayerIndex) + "-" + to_string(y + 1) + "-" + to_string(x + 1);
         ws_sendframe_txt(conn, packet.c_str());
     }
 
     void sendCurrent()
     {
         if (gamePlayerIndex == game->currentPlayerIndex)
-            ws_sendframe_txt(conn, "CURRENT0");
-        else
-            ws_sendframe_txt(conn, "CURRENT1");
+            ws_sendframe_txt(conn, string("CURRENT" + to_string(gamePlayerIndex)).c_str());
+        else 
+            ws_sendframe_txt(conn, string("CURRENT" + to_string(!gamePlayerIndex)).c_str());
     }
 
     void setOpponent(SocketPlayer *new_opponent)
@@ -215,6 +215,8 @@ void onmessage(ws_cli_conn_t *client, const unsigned char *msg, uint64_t size, i
         int x;
         game_state s;
 
+        if (clients[client].game->locked)
+            return;
         if (sscanf(packet_data, "%i-%i", &y, &x) != 2)
             return ;
         y -= 1;
@@ -244,38 +246,13 @@ void onmessage(ws_cli_conn_t *client, const unsigned char *msg, uint64_t size, i
             clients[client].sendScores();
             ws_sendframe_txt(client, "EQUAL");
         }
-        else if (s == PLAYER_1_WIN)
+        else if (s == PLAYER_1_WIN || s == PLAYER_2_WIN)
         {
             clients[client].sendScores();
             clients[client].opponent->sendScores();
 
-            if (clients[client].gamePlayerIndex == 0)
-            {
-                ws_sendframe_txt(client, "WINNER");
-                ws_sendframe_txt(clients[client].opponent->conn, "LOOSER");
-            }
-            else 
-            {
-                ws_sendframe_txt(client, "LOOSER");
-                ws_sendframe_txt(clients[client].opponent->conn, "WINNER");  
-            }
-           
-        }
-        else if (s == PLAYER_2_WIN)  
-        {
-            clients[client].sendScores();
-            clients[client].opponent->sendScores();
-
-            if (clients[client].gamePlayerIndex == 1)
-            {
-                ws_sendframe_txt(client, "WINNER");
-                ws_sendframe_txt(clients[client].opponent->conn, "LOOSER");
-            }
-            else 
-            {
-                ws_sendframe_txt(client, "LOOSER");
-                ws_sendframe_txt(clients[client].opponent->conn, "WINNER");  
-            }
+            ws_sendframe_txt(client, "WINNER");
+            ws_sendframe_txt(clients[client].opponent->conn, "LOOSER");
         }
         else if (s == IN_PROGRESS)
         {
@@ -286,7 +263,22 @@ void onmessage(ws_cli_conn_t *client, const unsigned char *msg, uint64_t size, i
             printf ("ERROR : unknow game_state %x\n", s);
         }
     }
-    //else if (packet_data = )
-   
+    else if (get_packet(msg, "NEW"))
+    {
+        if (!clients[client].opponent)
+            return ;
+        clients[client].game->start();
+        ws_sendframe_txt(client, "CLEAR");
+        ws_sendframe_txt(clients[client].opponent->conn, "CLEAR"); 
+        clients[client].sendCurrent();
+        clients[client].opponent->sendCurrent();
+    }
+    else if ((packet_data = get_packet(msg, "MSG")))
+    {
+        if (clients[client].name)
+            ws_sendframe_txt(client, (string("MSG") + clients[client].name + '-' + packet_data).c_str());
+        if (clients[client].opponent && clients[client].name)
+            ws_sendframe_txt(clients[client].opponent->conn, (string("MSG") + clients[client].name + '-' + packet_data).c_str());
+    }
 }
 

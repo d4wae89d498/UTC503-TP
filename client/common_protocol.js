@@ -5,6 +5,7 @@ let opponent;
 let roomsInterval;
 let socket = null;
 let moves = 0;
+let isFirst = 0;
 
 function askName()
 {
@@ -74,22 +75,25 @@ function initCommonProtocolSocket(url)
         // SET PLAYER POSITIONS (first or second) - CURRENT0 or CURRENT1
         else if (packet_data = get_packet(event, "CURRENT")) {
             id = packet_data;
-            
-            if (id && !moves)
+            if (!moves)
             {
-                document.getElementById("pseudo0").classList.remove("croix_p");
-                document.getElementById("pseudo0").classList.add("rond_p");
+                if (id == '0')
+                {
+                    document.getElementById("pseudo1").classList.remove("croix_p");
+                    document.getElementById("pseudo1").classList.add("rond_p");
 
-                document.getElementById("pseudo1").classList.remove("rond_p");
-                document.getElementById("pseudo1").classList.add("croix_p"); 
-            }
-            else 
-            {
-                 document.getElementById("pseudo0").classList.remove("rond_p");
-                document.getElementById("pseudo0").classList.add("croix_p");
+                    document.getElementById("pseudo0").classList.remove("rond_p");
+                    document.getElementById("pseudo0").classList.add("croix_p");    
+                }
+                else 
+                {
+                    document.getElementById("pseudo0").classList.remove("croix_p");
+                    document.getElementById("pseudo0").classList.add("rond_p");
 
-                document.getElementById("pseudo1").classList.remove("croix_p");
-                document.getElementById("pseudo1").classList.add("rond_p");  
+                    document.getElementById("pseudo1").classList.remove("rond_p");
+                    document.getElementById("pseudo1").classList.add("croix_p");      
+                }
+             
             }
             document.getElementById("pseudo0").classList.remove("current");
             document.getElementById("pseudo1").classList.remove("current");
@@ -103,11 +107,13 @@ function initCommonProtocolSocket(url)
             let s = packet_data.split("-");
 
 
-            document.getElementById("L" + s[1] + "C" + s[2]).innerText = (!(moves % 2) ? "x" : "o");
+            document.getElementById("L" + s[1] + "C" + s[2]).innerText = !(moves % 2) ?  "x" : "o";
             if (!(moves % 2)) {
+                document.getElementById("L" + s[1] + "C" + s[2]).classList.remove("rond");
                 document.getElementById("L" + s[1] + "C" + s[2]).classList.add("croix");
             }
             else {
+                document.getElementById("L" + s[1] + "C" + s[2]).classList.remove("croix");
                 document.getElementById("L" + s[1] + "C" + s[2]).classList.add("rond");
             }
 
@@ -140,6 +146,7 @@ function initCommonProtocolSocket(url)
                 items[i].classList.remove("croix");
                 i += 1;
             }
+            moves = 0;
         }
         // HANDLE A ROOM : ROOM0123456789
         else if (packet_data = get_packet(event, "WINNER")) {
@@ -152,11 +159,11 @@ function initCommonProtocolSocket(url)
             alert("Match nul!");
         }
         // HANDLE A CHAT : CHAT0-ANYTHINGUNTIL\0 
-        else if (packet_data = get_packet(event, "CHAT")) {
+        else if (packet_data = get_packet(event, "MSG")) {
             let s = packet_data.split("-");
             document.getElementsByClassName("messages")[0].innerHTML +=
-                `<span class="pseudo${s[0]}">${new Date().getHours}:${new Date().getMinutes()} ${document.getElementById("pseudo" + s[0]).innerText}:</span>
-        <span>${s1}</span> <hr/>`;
+                `<span class="pseudo${s[0]}">${new Date().getHours()}:${new Date().getMinutes()} ${s[0]}:</span>
+        <span>${s[1]}</span> <hr/>`;
         }
         // HANDLE A CHAT : CHAT0-ANYTHINGUNTIL\0 
         else if (packet_data = get_packet(event, "ILLEGAL")) {

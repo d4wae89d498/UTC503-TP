@@ -80,8 +80,6 @@ class TikTakToe : public BoardGame
     {
         if(moves == (max_x + 1) * (max_y + 1))
         {
-            players[0].score += 1;
-            players[1].score += 1;
             return true;
         }
         return false;
@@ -125,12 +123,14 @@ class TikTakToe : public BoardGame
         moves += 1;
         if (win(playerSymbol))
         {
+            locked = true;
             currentPlayer()->score += 1;
             moves = 0;
             return (currentPlayer()->is_first ? PLAYER_1_WIN : PLAYER_2_WIN);
         }
         else if (equal())
         {
+            locked = true;
             players[0].score += 1;
             players[1].score += 1;
             moves = 0;
