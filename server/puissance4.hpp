@@ -46,17 +46,19 @@ class Puissance4 : public BoardGame
         return false;
     }
 
-    bool checkDiagonalB(char playerSymbol)
+
+    bool checkDiagonalD(char playerSymbol)
     {
         (void) playerSymbol;
         int x = 0;
         while (x <= max_x)
         {
            int count = 0;
-            int y = max_y;
-            while (y <= max_y - x)
+            int y = 0;
+            while (y < x && y <= max_y)
             {
-                if (cases[y][x + y] == playerSymbol)
+                printf("check diagonal D : y=%i x=%i \n", max_y - y, max_x - x + y);
+                if (cases[max_y - y][max_x - x + y] == playerSymbol)
                 {
                     count += 1;
                     if (count == 4)
@@ -66,6 +68,61 @@ class Puissance4 : public BoardGame
                     count = 0;
                 y += 1;
             }
+            printf("\n\n");
+            x += 1;
+        }
+        return false;
+    }
+
+    bool checkDiagonalC(char playerSymbol)
+    {
+        (void) playerSymbol;
+        int x = 0;
+        while (x <= max_x)
+        {
+           int count = 0;
+            int y = 0;
+            while (y <= x && y <= max_y)
+            {
+                printf("check diagonal C : y=%i x=%i \n", y, max_x - x + y);
+                if (cases[y][max_x - x + y] == playerSymbol)
+                {
+                    count += 1;
+                    if (count == 4)
+                        return true;
+                }
+                else 
+                    count = 0;
+                y += 1;
+            }
+            printf("\n\n");
+            x += 1;
+        }
+        return false;
+    }
+
+    bool checkDiagonalB(char playerSymbol)
+    {
+        (void) playerSymbol;
+        int x = 0;
+        while (x <= max_x)
+        {
+           int count = 0;
+            int y = 0;
+            while (y <= x && y <= max_y)
+            {
+                printf("check diagonal B : y=%i x=%i \n", max_y - y, x - y);
+                if (cases[max_y - y][x - y] == playerSymbol)
+                {
+                    count += 1;
+                    if (count == 4)
+                        return true;
+                }
+                else 
+                    count = 0;
+                y += 1;
+            }
+            printf("\n\n");
             x += 1;
         }
         return false;
@@ -79,8 +136,9 @@ class Puissance4 : public BoardGame
         {
            int count = 0;
             int y = 0;
-            while (y <= x)
+            while (y <= x && y <= max_y)
             {
+                printf("check diagonal A : y=%i x=%i \n", y, x - y);
                 if (cases[y][x - y] == playerSymbol)
                 {
                     count += 1;
@@ -91,6 +149,7 @@ class Puissance4 : public BoardGame
                     count = 0;
                 y += 1;
             }
+            printf("\n\n");
             x += 1;
         }
         return false;
@@ -107,7 +166,7 @@ class Puissance4 : public BoardGame
 
     bool win(char playerSymbol)
     {
-        if (checkLines(playerSymbol) || checkColumns(playerSymbol) || chekDiagonalA(playerSymbol) || checkDiagonalB(playerSymbol))
+        if (checkLines(playerSymbol) || checkColumns(playerSymbol) || chekDiagonalA(playerSymbol) || checkDiagonalB(playerSymbol) || checkDiagonalC(playerSymbol) || checkDiagonalD(playerSymbol))
             return true;
         return false;
     }
