@@ -10,10 +10,15 @@ tiktaktoe_server:	server/tiktaktoe.cpp submodules $(DEPS)
 	clang++ $(CFLAGS) $< server/wsServer/libws.a -o $@
 puissance4_server: server/puissance4.cpp submodules  $(DEPS) 
 	clang++ $(CFLAGS) $< server/wsServer/libws.a -o $@
-dev: all 
+exit:
+	kill $(shell lsof -t -i:8030) || echo
+	kill $(shell lsof -t -i:8020) || echo	
+	kill $(shell lsof -t -i:8667) || echo	
+dev: all  exit
 	./tiktaktoe_server &
 	./puissance4_server &
-	cd client && php -S 127.0.0.1:8667
+	cd client && php -S 127.0.0.1:8667 &
+	cd ..
 clean:
 	rm -rf tiktaktoe_server puissance4_server
 re: clean all

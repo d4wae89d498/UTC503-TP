@@ -64,6 +64,8 @@ class SocketPlayer
         {
             opponent->gamePlayerIndex = 0;
             opponent->game->handleDiscon(gamePlayerIndex);
+            opponent->game = shared_ptr<GAME_TYPE>(new GAME_TYPE());
+            opponent->game->bothPlayerConnected = 0;
             opponent->opponent = 0;
             opponent->sendNames();
             opponent->sendScores();
@@ -118,7 +120,7 @@ void onclose(ws_cli_conn_t *client)
     free(clients[client].name);
     if (clients[client].game)
     {
-        
+        clients[client].game->bothPlayerConnected = false; 
         clients[client].game->handleDiscon(clients[client].gamePlayerIndex);
         if (clients[client].opponent)
         {
@@ -163,11 +165,20 @@ void onmessage(ws_cli_conn_t *client, const unsigned char *msg, uint64_t size, i
         rooms.append("\n");
       
         // for each players
+
+       // printf("\n\n");
         for (auto it = clients.begin(); it != clients.end(); ++it)
         {
             // dont show :  current client in rooms, non-logged in users, currently playing users
+
+           // printf("testing .... %s ", it->second.name);
+
             if (it->first == client || !it->second.game || it->second.game->bothPlayerConnected)
+            {
+           //     printf("KO : %p %i\n", it->second.game.get(), it->second.game ? it->second.game->bothPlayerConnected : 0);
                 continue ;
+            }
+         //   printf("OK\n");
             rooms.append("ROOM-");
             rooms.append(it->second.name);
             rooms.append("\n");

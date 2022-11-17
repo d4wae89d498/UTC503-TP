@@ -3,7 +3,7 @@ let id;
 let name = localStorage.getItem("name") ?? "";
 let opponent;
 let roomsInterval;
-let socket;
+let socket = null;
 
 function askName()
 {
@@ -14,7 +14,8 @@ function askName()
 
 function initCommonProtocolSocket(url)
 {
-    socket = new WebSocket(url);
+    if (socket == null)
+        socket = new WebSocket(url);
     console.log("socket: ", socket);
 
     id = "-1";
