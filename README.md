@@ -7,6 +7,8 @@ Par Jérémy, Alexis, Marc
 - Interface utilisateur : HTML / CSS
 - Protocole de communication : WebSocket
 
+Testé sur : Ubuntu 20.04 avec WSL ; Debian 11; MacOS 10.13; MacOS 10.15
+
 **Démo:**
 - https://shaiya.fr/UTC503-TP/client
 
