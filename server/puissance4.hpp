@@ -19,10 +19,11 @@ class Puissance4 : public BoardGame
                     total += 1;
                 else 
                     total = 0;
+                if (total == 4)
+                    return true;
                 y += 1;
             }
-            if (total == 4)
-                return true;
+            
             i += 1;
         }
         return false;
