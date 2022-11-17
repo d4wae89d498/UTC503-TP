@@ -61,7 +61,7 @@ class Puissance4 : public BoardGame
         {
            int count = 0;
             int y = 0;
-            while (y < x && y <= max_y)
+            while (y <= x && y <= max_y)
             {
                 printf("check diagonal D : y=%i x=%i \n", max_y - y, max_x - x + y);
                 if (cases[max_y - y][max_x - x + y] == playerSymbol)
