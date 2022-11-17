@@ -5,6 +5,14 @@ class Chat extends Component
     {
         super();
         this.hidden = true;
+
+        window['sendChat'] = (e) => {
+            console.log(e)
+            if (e && e.keyCode && e.keyCode != 13)
+                return ;
+            socket.send('MSG'+document.getElementById('chattext').value);  
+            document.getElementById('chattext').value = '';
+        }
     }  
 
     async render() 
@@ -15,7 +23,7 @@ class Chat extends Component
             <div class="messages">
             </div>
             <center>
-                <input type="text" id="chattext"/><button style="display:inline-block" onclick="socket.send('MSG'+document.getElementById('chattext').value)">ENVOYER</button>
+                <input type="text" id="chattext" onkeyup="sendChat(event)" autofocus/><button style="display:inline-block" onclick="sendChat()">ENVOYER</button>
             </center>
         </div>`; 
     }

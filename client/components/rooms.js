@@ -5,11 +5,8 @@ class Rooms extends Component
     {
         super();
         this.hidden = true;
-    }
-
-    async afterUpdate()
-    {
-        if (!this.hidden && !roomsInterval)
+        this.afterUpdate = () => {
+            if (!this.hidden && !roomsInterval)
         {
             roomsInterval = setInterval(() => 
             {
@@ -20,6 +17,7 @@ class Rooms extends Component
         {
             clearInterval(roomsInterval);
             roomsInterval = null;
+        }   
         }
     }
 

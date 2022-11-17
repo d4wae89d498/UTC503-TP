@@ -22,23 +22,20 @@ class Component
     }
 
 
-    /* virtual */ async afterUpdate()
-    {
-
-    }
-
     show()
     {
         document.getElementById(componentIDPrefix + this.uid).classList.remove("hide");   
         this.hidden = false;
-        this.afterUpdate();
+        if (this.afterUpdate)
+            this.afterUpdate();
     }
 
     hide()
     {
         document.getElementById(componentIDPrefix + this.uid).classList.add("hide"); 
         this.hidden = true;
-        this.afterUpdate(); 
+        if (this.afterUpdate)
+            this.afterUpdate(); 
     }
 
     async renderOuterHtml() 
@@ -54,6 +51,7 @@ class Component
     {
         if (document.getElementById(componentIDPrefix + this.uid))
             document.getElementById(componentIDPrefix + this.uid).outerHTML = await this.renderOuterHtml();
-        await this.afterUpdate();
+        if (this.afterUpdate)
+            this.afterUpdate();
     }
 }
