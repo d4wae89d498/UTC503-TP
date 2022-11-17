@@ -46,7 +46,7 @@ class Puissance4 : public BoardGame
         return false;
     }
 
-    bool chekDiagonalB(char playerSymbol)
+    bool checkDiagonalB(char playerSymbol)
     {
         (void) playerSymbol;
         int x = 0;

@@ -66,7 +66,7 @@ function initCommonProtocolSocket(url)
             for (const i in rooms) {
                 let names = rooms[i].split("-");
                 if (names.length == 1)
-                    html += `<li><a href="#" class="roomc" onclick="chooseOp(this.innerText)">${names[0]}</a></li>`;
+                    html += `<li><a href="#" class="roomc" onclick="chooseOp(this.innerText)" ondblclick="function(e){e.preventDefault();e.stopImmediatePropagation(); return false;}">${names[0]}</a></li>`;
                 else {
                     console.log(names);
                     html += `<li>${names[0]} - ${names[1]}</li>`;
